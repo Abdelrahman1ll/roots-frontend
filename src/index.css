@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --color-dark: #1A1A1A; /* Soft Black for text */
+  --color-pakistan: #444444; /* Dark gray for secondary text */
+  --color-cornsilk: #FFFFFF; /* Pure White background */
+  --color-earth: #F9F9F9; /* Very light gray for backgrounds */
+  --color-tiger: #1A1A1A; /* Accent Soft Black */
+  --color-beige: #F4F4F4; /* Light Accent gray */
+  --color-border: #EEEEEE; /* Subtle border */
+  --color-gray-soft: #F5F5F5; /* Very Light Gray for backgrounds */
+  --color-gray-medium: #E5E5E5; /* Light Gray for hover/accents */
+}
+
+@font-face {
+  font-family: "Dancing Script Local";
+  src: url("/fonts/DancingScript-VariableFont_wght.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base styles with performance considerations */
+body {
+  background-color: var(--color-cornsilk);
+  color: var(--color-dark);
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  font-display: swap;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+  /* Hide scrollbar visually but maintain functionality */
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+/* Custom text selection color */
+::selection {
+  background-color: var(--color-dark);
+  color: var(--color-cornsilk);
+}
+
+::-moz-selection {
+  background-color: var(--color-dark);
+  color: var(--color-cornsilk);
+}
+
+/* Custom Utilities for Performance */
+.h-100 {
+  height: 25rem; /* 400px */
+}
+
+.aspect-product {
+  aspect-ratio: 4/5;
+}
+
+/* Simplified Loading Dot */
+@keyframes dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.animate-dot {
+  animation: dot 1.4s infinite ease-in-out both;
+}
+
+.full-screen-loader {
+  background: var(--color-cornsilk);
+}
+
+/* global.css أو أي ملف CSS */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Toast Container - Mobile spacing from bottom */
+.premium-toast-body {
+  @media (max-width: 768px) {
+    bottom: 10px !important; /* Space for bottom navigation bar */
+  }
+}

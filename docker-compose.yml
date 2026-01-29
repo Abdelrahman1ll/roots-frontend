@@ -1,0 +1,100 @@
+services:
+  web:
+    image: abdelrahmanll1/react-web:latest
+    # build: .
+    # restart: unless-stopped
+    # env_file:
+    #   - ./.env.local
+    deploy:
+      replicas: 4
+      update_config:
+        parallelism: 2
+        delay: 10s
+        order: start-first
+      restart_policy:
+        condition: any
+        delay: 5s
+    ports:
+      - '8080:80'
+    # command: ["npm", "run", "dev"]
+    # networks:
+    #   - networkName
+
+  # nginx:
+  #   image: nginx:latest
+  #   ports:
+  #     - '80:80'
+  #     - '443:443'
+  #   deploy:
+  #     replicas: 2
+  #     update_config:
+  #       parallelism: 1
+  #       delay: 10s
+  #       order: start-first
+  #     restart_policy:
+  #       condition: any
+  #       delay: 5s
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+  #     - certbot-etc:/etc/letsencrypt
+  #     - webroot:/var/www/html
+  #   depends_on:
+  #     - web
+  #   networks:
+  #     - networkName
+
+  # certbot:
+  #   image: certbot/certbot:latest
+  #   deploy:
+  #     replicas: 2
+  #     update_config:
+  #       parallelism: 1
+  #       delay: 10s
+  #       order: start-first
+  #     restart_policy:
+  #       condition: any
+  #       delay: 5s
+  #   volumes:
+  #     - certbot-etc:/etc/letsencrypt
+  #     - certbot-var:/var/lib/letsencrypt
+  #     - webroot:/var/www/html
+  #   command: certonly --webroot --webroot-path=/var/www/html --email abdomohamed2200066@gmail.com --agree-tos --no-eff-email --non-interactive --keep-until-expiring -d abdelrahma.com
+  #   depends_on:
+  #     - nginx
+  #   networks:
+  #     - networkName
+
+# networks:
+#   networkName:
+
+# volumes:
+#   certbot-etc:
+#   certbot-var:
+#   webroot:
+
+
+# =======================
+# اول مرة
+# docker build -t react-web:latest .
+# docker stack deploy -c docker-compose.yml react-web
+
+# بعد التعديل
+# docker build -t react-web:latest .
+
+# تسجيل الدوكر
+# docker tag react-web:latest abdelrahmanll1/react-web:latest
+# docker login
+
+# docker push abdelrahmanll1/react-web:latest
+
+
+# docker stack deploy -c docker-compose.yml react-web
+
+# اغلاق السكربت
+# docker stack rm react-web
+
+# عرض البيانات
+# docker stack ps react-web
+# =======================
+
+

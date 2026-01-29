@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <link rel="apple-touch-icon" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="manifest" href="/manifest.json" />
+    <!-- PWA manifest for app-like behavior - ملف تعريف تطبيق الويب -->
+
+    <!-- Content Security Policy (CSP): Protects the site from attacks like XSS -->
+    <!-- سياسة أمان المحتوى: تحمي الموقع من الهجمات وحقن الأكواد الضارة -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://cdn.jsdelivr.net https://js.stripe.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https: blob:; connect-src 'self' https://accounts.google.com https://*.cloudinary.com https://*.paymob.com https://api.stripe.com https://formspree.io https://api.bigdatacloud.net ws: wss:; frame-src 'self' https://accounts.google.com https://*.paymob.com https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com; worker-src 'self' blob:; media-src 'self' data:;"
+    />
+
+    <!-- SEO Meta Tags - كلمات البحث ووصف الموقع لمحركات البحث -->
+    <title>
+      ROOTS - Roots Fashion Store | Trendy Clothing | متجر الأزياء العصرية
+    </title>
+    <meta
+      name="description"
+      content="ROOTS - Your destination for modern fashion and trendy clothing. Shop the latest styles in men's and women's apparel with fast delivery. | متجرك الأول للأزياء العصرية والملابس. تسوق أحدث صيحات الموضة من الملابس بأفضل الأسعار مع توصيل سريع."
+    />
+    <meta
+      name="keywords"
+      content="roots, fashion, clothing, apparel, online shopping, trendy clothes, modern fashion, روتس, ملابس, أزياء, تسوق أونلاين, موضة"
+    />
+    <meta name="author" content="ROOTS" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="robots" content="index, follow" />
+    <!-- Tells Google to index this page - يخبر جوجل بفهرسة هذه الصفحة -->
+
+    <!-- Canonical URL: Prevents duplicate content issues by telling Google the preferred URL -->
+    <!-- الرابط الأساسي: يمنع مشاكل المحتوى المكرر ويخبر جوجل بالرابط الرسمي للموقع -->
+    <link
+      rel="canonical"
+      id="canonical-link"
+      href="https://roots-fashion.vercel.app/"
+    />
+    <script>
+      // Dynamically set canonical URL based on current host - تعيين الرابط الأساسي ديناميكياً بناءً على الموقع الحالي
+      document
+        .getElementById("canonical-link")
+        .setAttribute(
+          "href",
+          window.location.protocol +
+            "//" +
+            window.location.host +
+            window.location.pathname,
+        );
+    </script>
+
+    <!-- Open Graph / Facebook: Controls how the site looks when shared on social media -->
+    <!-- إعدادات مشاركة الموقع على فيسبوك ووسائل التواصل الاجتماعي -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="ROOTS - Modern Fashion Store | متجر الأزياء العصرية"
+    />
+    <meta
+      property="og:description"
+      content="Shop the latest styles in trendy clothing and modern fashion at the best prices | تسوق أحدث صيحات الموضة من الملابس بأفضل الأسعار"
+    />
+    <meta property="og:site_name" content="ROOTS" />
+
+    <!-- Twitter: Controls how the site looks when shared on Twitter/X -->
+    <!-- إعدادات مشاركة الموقع على منصة إكس (تويتر سابقاً) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="ROOTS - Modern Fashion Store | متجر الأزياء العصرية"
+    />
+    <meta
+      name="twitter:description"
+      content="Shop the latest styles in trendy clothing and modern fashion at the best prices | تسوق أحدث صيحات الموضة من الملابس بأفضل الأسعار"
+    />
+
+    <!-- Resource Hints: Speeds up loading by pre-connecting to fonts and APIs -->
+    <!-- تسريع التحميل: البدء في الاتصال بالخطوط والخدمات الخارجية قبل طلبها -->
+    <link rel="dns-prefetch" href="https://accounts.google.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <link rel="preconnect" href="https://accounts.google.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Font: Cairo for Arabic and Latin text -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Preload critical font to prevent layout shift (CLS) -->
+    <!-- تحميل الخطوط الأساسية مسبقاً لمنع اهتزاز الصفحة عند التحميل -->
+    <link
+      rel="preload"
+      href="/fonts/DancingScript-VariableFont_wght.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

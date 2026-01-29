@@ -1,0 +1,40 @@
+# Robots.txt: Rules for search engine bots (like Googlebot)
+# ملف الأوامر: يحدد لمحركات البحث الصفحات المسموح بفهرستها والصفحات الممنوعة (مثل لوحة التحكم)
+User-agent: *
+Allow: /
+
+# Disallow admin and user-specific pages
+Disallow: /dashboard
+Disallow: /all-users
+Disallow: /edit-user-owner/
+Disallow: /add-product
+Disallow: /edit-product/
+Disallow: /add-delivery
+Disallow: /discount-codes
+Disallow: /all-users-messages
+Disallow: /email-order-dispatcher
+Disallow: /category
+Disallow: /color
+
+# Disallow user profile and orders
+Disallow: /profile
+Disallow: /orders
+Disallow: /checkout
+
+# Allow public pages
+Allow: /
+Allow: /products
+Allow: /products-details/
+Allow: /cart
+Allow: /wishlist
+Allow: /about-us
+Allow: /contact-us
+Allow: /faqs
+Allow: /shipping-delivery
+Allow: /privacy-policy
+Allow: /terms-conditions
+Allow: /return-exchange-policy
+Allow: /sales-payment-policy
+
+# Sitemap
+Sitemap: https://roots-fashion.vercel.app/sitemap.xml
