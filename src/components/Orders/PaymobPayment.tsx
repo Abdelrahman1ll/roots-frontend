@@ -151,7 +151,7 @@ export default function PaymobPayment({
 
   return (
     <div className="w-full">
-      <div className="p-2 md:p-4 sm:p-6 rounded-3xl shadow-xl bg-white/40 backdrop-blur-xl border border-white/60 hover:shadow-2xl transition-all duration-300">
+      <div className="p-2 md:p-4 sm:p-6 shadow-xl bg-white/40 backdrop-blur-xl border border-white/60 hover:shadow-2xl transition-all duration-300">
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2.5 rounded-2xl bg-(--color-pakistan)/5 text-(--color-pakistan)">
             <CreditCard size={24} />

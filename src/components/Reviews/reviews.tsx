@@ -36,7 +36,7 @@ export default function Reviews({
   const { user } = useContext(AuthContext);
 
   return (
-    <section className="py-10 px-4 bg-(--color-earth)/30 border-t border-(--color-border)">
+    <section className="pb-10 pt-4 px-4 bg-white/30">
       <div className="w-full max-w-3xl mx-auto">
         {/* Write a Review Section */}
         {!hideForm && (
@@ -111,72 +111,93 @@ export default function Reviews({
 
           <AnimatePresence mode="popLayout">
             {reviewsData?.review
-              ?.slice(0, limit || reviewsData.review.length)
-              .map((review: ReviewType) => (
-                <motion.div
-                  key={review?.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-8 bg-white border border-(--color-border) rounded-none"
-                >
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-(--color-earth) flex items-center justify-center text-[11px] font-bold text-(--color-dark)">
-                        {review?.user?.firstName?.charAt(0)}
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-(--color-dark) uppercase tracking-wide">
-                          {review?.user?.firstName} {review?.user?.lastName}
-                        </h4>
-                        <div className="flex gap-0.5 mt-1">
-                          {Array.from({ length: 5 }).map((_, i) => (
-                            <Star
-                              key={i}
-                              size={10}
-                              color={
-                                i < review?.rating
-                                  ? "var(--color-dark)"
-                                  : "#EEE"
-                              }
-                              fill={
-                                i < review?.rating
-                                  ? "var(--color-dark)"
-                                  : "transparent"
-                              }
-                              strokeWidth={0}
-                            />
-                          ))}
+              ?.filter((review: ReviewType) => {
+                const isUserReview = user?.id === review?.user?.id;
+                // Check if current user has a review in this list
+                const userHasReview =
+                  user &&
+                  reviewsData.review.some((r: ReviewType) => r.user?.id === user.id);
+
+                if (limit) {
+                  // Product Page:
+                  // 1. If user WROTE a review, show ONLY theirs.
+                  // 2. If user DID NOT write a review, show community reviews.
+                  if (userHasReview) return isUserReview;
+                  return !isUserReview;
+                }
+
+                // Reviews Page:
+                // Hide user's review (as requested) so they don't see it duplicated/mixed
+                return !isUserReview;
+              })
+              .slice(0, limit || reviewsData.review.length)
+              .map((review: ReviewType) => {
+                return (
+                  <motion.div
+                    key={review?.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-8 bg-white border border-(--color-border) rounded-none"
+                  >
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-(--color-earth) flex items-center justify-center text-[11px] font-bold text-(--color-dark)">
+                          {review?.user?.firstName?.charAt(0)}
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-(--color-dark) uppercase tracking-wide">
+                            {review?.user?.firstName} {review?.user?.lastName}
+                          </h4>
+                          <div className="flex gap-0.5 mt-1">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star
+                                key={i}
+                                size={10}
+                                color={
+                                  i < review?.rating
+                                    ? "var(--color-dark)"
+                                    : "#EEE"
+                                }
+                                fill={
+                                  i < review?.rating
+                                    ? "var(--color-dark)"
+                                    : "transparent"
+                                }
+                                strokeWidth={0}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
+                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                        {review?.createdAt &&
+                          new Date(review?.createdAt).toLocaleDateString()}
+                      </span>
                     </div>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                      {review?.createdAt &&
-                        new Date(review?.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
 
-                  <p className="text-sm text-gray-600 leading-relaxed font-medium mb-6">
-                    {review?.comment}
-                  </p>
+                    <p className="text-sm text-gray-600 leading-relaxed font-medium mb-6">
+                      {review?.comment}
+                    </p>
 
-                  {user?.id === review?.user?.id && (
-                    <div className="flex gap-4 justify-end pt-6 border-t border-(--color-border)/50">
-                      <button
-                        onClick={() => handleEditReview(review)}
-                        className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:text-(--color-dark) transition-colors"
-                      >
-                        Edit Post
-                      </button>
-                      <button
-                        onClick={() => handleDeleteReview(review.id)}
-                        className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  )}
-                </motion.div>
-              ))}
+                    {user?.id === review?.user?.id && (
+                      <div className="flex gap-4 justify-end pt-6 border-t border-(--color-border)/50">
+                        <button
+                          onClick={() => handleEditReview(review)}
+                          className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:text-(--color-dark) transition-colors"
+                        >
+                          Edit Post
+                        </button>
+                        <button
+                          onClick={() => handleDeleteReview(review.id)}
+                          className="text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:text-red-500 transition-colors"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
           </AnimatePresence>
 
           {limit &&

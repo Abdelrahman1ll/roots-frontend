@@ -6,7 +6,7 @@ import type { ProductType } from "../../types/ProductType";
 import type { UserType } from "../../types/UserType";
 import { getCloudinaryUrl, getCloudinarySrcSet } from "../../utils/cloudinary";
 import useProduct from "./useProduct";
-import { usePostCartMutation, useGetCartQuery } from "../../redux/Cart/apiCart";
+import { usePostCartMutation } from "../../redux/Cart/apiCart";
 import { SignupContext } from "../../context/SignupContext";
 import { toast } from "react-toastify";
 import type { ProductSizeType } from "../../types/ProductType";
@@ -80,7 +80,6 @@ const ProductCard = memo(
   }) => {
     const isOutOfStock = product.stock === 0;
     const [postCart, { isLoading: isAdding }] = usePostCartMutation();
-    const { refetch: refetchCart } = useGetCartQuery({});
     const { openSignup } = useContext(SignupContext);
 
     const handleQuickAdd = async (e: React.MouseEvent) => {
@@ -113,7 +112,6 @@ const ProductCard = memo(
           quantity: 1,
           sizes: availableSize.id,
         }).unwrap();
-        refetchCart();
         toast.success(`${product.name} added to cart`);
       } catch (error: unknown) {
         const err = error as { data?: { message?: string } };

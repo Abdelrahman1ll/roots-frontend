@@ -45,11 +45,12 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, y: 20 }}
           whileHover={{
             backgroundColor: "var(--color-dark)",
-            color: "white",
+            color: "#ffffff",
           }}
           whileTap={{ scale: 0.98 }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-6 z-50 flex items-center justify-center w-10 h-10 rounded-none bg-white border border-(--color-dark) cursor-pointer transition-all duration-300 group"
+          style={{ backgroundColor: "#ffffff", color: "var(--color-dark)" }}
+          className="fixed bottom-24 right-6 z-50 flex items-center justify-center w-10 h-10 rounded-none border border-(--color-dark) cursor-pointer group"
           title="الرجوع للأعلى"
         >
           <ArrowUp

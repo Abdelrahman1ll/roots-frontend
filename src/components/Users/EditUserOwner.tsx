@@ -6,7 +6,6 @@ import {
   Phone,
   Calendar,
   Loader2,
-  CheckCircle,
   ChevronDown,
   ShieldCheck,
   Crown,
@@ -65,7 +64,7 @@ export default function EditUserOwner() {
   }, [users, id]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
@@ -166,37 +165,35 @@ export default function EditUserOwner() {
 
   if (isUsersLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(circle_at_top_right,var(--color-tiger-10),transparent),radial-gradient(circle_at_bottom_left,var(--color-pakistan-10),transparent)]">
-        <Loader2 className="w-12 h-12 text-(--color-tiger) animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <Loader2 className="w-12 h-12 text-(--color-pakistan) animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,var(--color-tiger-10),transparent),radial-gradient(circle_at_bottom_left,var(--color-pakistan-10),transparent)] flex flex-col items-center py-12 px-4 md:px-8">
+    <div className="min-h-screen bg-white flex flex-col items-center py-16 px-4 md:px-8 mt-18 overflow-x-hidden">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="w-full max-w-4xl"
       >
-        {/* Navigation */}
-
         {/* Header Section */}
         <motion.div
           variants={itemVariants}
-          className="text-center mb-6 md:mb-10"
+          className="text-left mb-16 border-b border-(--color-border) pb-8"
         >
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-(--color-pakistan)/5 border border-(--color-pakistan)/10 text-(--color-pakistan) mb-4">
-            <User size={16} />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-3 text-(--color-pakistan) mb-6">
+            <User size={20} />
+            <span className="text-[10px] font-black tracking-widest">
               Administration Panel
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-(--color-pakistan) tracking-tight mb-4">
+          <h1 className="text-4xl md:text-6xl font-black text-(--color-dark) tracking-tighter mb-4">
             Edit Profile
           </h1>
-          <p className="text-(--color-pakistan)/60 font-medium max-w-lg mx-auto leading-relaxed">
+          <p className="text-(--color-pakistan) font-bold tracking-widest uppercase text-[10px] opacity-60">
             Modify user credentials and system access permissions with ease.
           </p>
         </motion.div>
@@ -204,13 +201,13 @@ export default function EditUserOwner() {
         {/* Form Card */}
         <motion.div
           variants={itemVariants}
-          className="bg-white/40 backdrop-blur-2xl border border-white/60 p-5 md:p-10 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)]"
+          className="bg-white border border-(--color-border) p-8 md:p-12 rounded-none"
         >
           <form onSubmit={handleSave} className="space-y-8">
             <div className="space-y-6">
               {/* Role Selection - Priority Full Width */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+              <div className="space-y-4">
+                <label className="text-[10px] font-black text-(--color-pakistan) tracking-[0.2em] opacity-40">
                   System Role
                 </label>
                 <RoleDropdown
@@ -222,120 +219,106 @@ export default function EditUserOwner() {
                   }}
                 />
                 {errors.role && (
-                  <p className="text-red-500 text-[10px] font-bold ml-1">
+                  <p className="text-red-500 text-[10px] font-bold">
                     {errors.role}
                   </p>
                 )}
               </div>
 
               {/* Main Fields - Pairs Grid (2x2x1) */}
-              <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                <div className="space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+              <div className="grid grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-(--color-pakistan) tracking-[0.2em] opacity-40">
                     First Name
                   </label>
-                  <div className="relative group">
+                  <div className="relative">
                     <input
                       type="text"
                       name="firstName"
                       value={userData.firstName}
                       onChange={handleChange}
                       placeholder="John"
-                      className="w-full pl-4 pr-10 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
-                    />
-                    <CheckCircle
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all ${
-                        userData.firstName.length >= 2
-                          ? "opacity-100 scale-100 text-green-500"
-                          : "opacity-0 scale-50"
-                      }`}
+                      className="w-full px-6 py-4 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-black text-(--color-dark) text-sm tracking-widest placeholder:text-gray-300"
                     />
                   </div>
                   {errors.firstName && (
-                    <p className="text-red-500 text-[10px] font-bold ml-1">
+                    <p className="text-red-500 text-[10px] font-bold">
                       {errors.firstName}
                     </p>
                   )}
                 </div>
 
-                <div className="space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-(--color-pakistan) tracking-[0.2em] opacity-40">
                     Last Name
                   </label>
-                  <div className="relative group">
+                  <div className="relative">
                     <input
                       type="text"
                       name="lastName"
                       value={userData.lastName}
                       onChange={handleChange}
                       placeholder="Doe"
-                      className="w-full pl-4 pr-10 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
-                    />
-                    <CheckCircle
-                      className={`absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 transition-all ${
-                        userData.lastName.length >= 2
-                          ? "opacity-100 scale-100 text-green-500"
-                          : "opacity-0 scale-50"
-                      }`}
+                      className="w-full px-6 py-4 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-black text-(--color-dark) text-sm tracking-widest placeholder:text-gray-300"
                     />
                   </div>
                   {errors.lastName && (
-                    <p className="text-red-500 text-[10px] font-bold ml-1">
+                    <p className="text-red-500 text-[10px] font-bold">
                       {errors.lastName}
                     </p>
                   )}
                 </div>
 
-                <div className="space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-(--color-pakistan) tracking-[0.2em] opacity-40">
                     Email Address
                   </label>
-                  <div className="relative group">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-(--color-tiger)" />
+                  <div className="relative">
+                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-(--color-dark) opacity-20" />
                     <input
                       type="email"
                       name="email"
                       value={userData.email}
                       onChange={handleChange}
                       placeholder="john@example.com"
-                      className="w-full pl-12 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
+                      className="w-full pl-16 pr-6 py-4 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-black text-(--color-dark) text-sm tracking-widest placeholder:text-gray-300"
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-red-500 text-[10px] font-bold ml-1">
+                    <p className="text-red-500 text-[10px] font-bold">
                       {errors.email}
                     </p>
                   )}
                 </div>
 
-                <div className="space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                <div className="space-y-4">
+                  <label className="text-[10px] font-black text-(--color-pakistan) tracking-[0.2em] opacity-40">
                     Phone Number
                   </label>
-                  <div className="relative group">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-(--color-tiger)" />
+                  <div className="relative">
+                    <Phone className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-(--color-dark) opacity-20" />
                     <input
                       type="tel"
                       name="phone"
                       value={userData.phone}
                       onChange={handleChange}
                       placeholder="01234567890"
-                      className="w-full pl-12 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
+                      className="w-full pl-16 pr-6 py-4 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-black text-(--color-dark) text-sm tracking-widest placeholder:text-gray-300"
                     />
                   </div>
                   {errors.phone && (
-                    <p className="text-red-500 text-[10px] font-bold ml-1">
+                    <p className="text-red-500 text-[10px] font-bold">
                       {errors.phone}
                     </p>
                   )}
                 </div>
 
-                <div className="col-span-2 space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                <div className="col-span-2 space-y-4">
+                  <label className="text-[10px] font-black text-(--color-pakistan) tracking-[0.2em] opacity-40">
                     Date of Birth
                   </label>
-                  <div className="relative group">
-                    <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-(--color-tiger)" />
+                  <div className="relative">
+                    <Calendar className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-(--color-dark) opacity-20" />
                     <input
                       type="date"
                       name="birthday"
@@ -343,11 +326,11 @@ export default function EditUserOwner() {
                         userData.birthday ? userData.birthday.split("T")[0] : ""
                       }
                       onChange={handleChange}
-                      className="w-full pl-12 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) shadow-sm appearance-none"
+                      className="w-full pl-16 pr-6 py-4 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-black text-(--color-dark) text-sm tracking-widest"
                     />
                   </div>
                   {errors.birthday && (
-                    <p className="text-red-500 text-[10px] font-bold ml-1">
+                    <p className="text-red-500 text-[10px] font-bold">
                       {errors.birthday}
                     </p>
                   )}
@@ -355,43 +338,34 @@ export default function EditUserOwner() {
               </div>
 
               {/* Secure Footer Info */}
-              <div className="p-4 bg-(--color-pakistan)/5 border border-(--color-pakistan)/10 rounded-2xl text-[11px] font-medium text-(--color-pakistan)/60 leading-relaxed italic text-center">
-                "Confirming changes will update the user's primary credentials
-                across our entire boutique network."
+              <div className="p-6 bg-(--color-gray-soft) border border-(--color-border) text-[10px] font-bold text-(--color-pakistan) leading-loose tracking-widest text-center opacity-40">
+                Confirming changes will update the user's primary credentials
+                across our entire boutique network.
               </div>
             </div>
 
             {/* Submit Section */}
-            <motion.div variants={itemVariants} className="pt-4">
+            <motion.div variants={itemVariants} className="pt-8">
               <motion.button
-                whileHover={
-                  !isLoading
-                    ? {
-                        scale: 1.01,
-                        boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)",
-                      }
-                    : {}
-                }
+                whileHover={!isLoading ? { opacity: 0.9 } : {}}
                 whileTap={!isLoading ? { scale: 0.98 } : {}}
                 disabled={isLoading}
                 type="submit"
-                className={`w-full flex items-center justify-center gap-3 text-white font-black uppercase tracking-[0.2em] text-xs py-5 rounded-2xl shadow-xl transition-all relative overflow-hidden group
+                className={`w-full flex items-center justify-center gap-3 text-white font-black tracking-widest text-[11px] py-6 rounded-none shadow-none transition-all relative overflow-hidden group
                  ${
                    isLoading
-                     ? "bg-(--color-earth) cursor-not-allowed"
-                     : "bg-linear-to-r from-(--color-tiger) to-(--color-earth) hover:opacity-90 cursor-pointer"
+                     ? "bg-gray-400 cursor-not-allowed"
+                     : "bg-(--color-dark) hover:bg-black cursor-pointer"
                  }`}
               >
-                <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-
                 {isLoading ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
-                  <>Save User Profile</>
+                  <>SAVE USER PROFILE</>
                 )}
               </motion.button>
 
-              <p className="text-center mt-6 text-[10px] font-bold text-(--color-pakistan)/30 uppercase tracking-[0.3em]">
+              <p className="text-center mt-8 text-[9px] font-black text-(--color-pakistan) tracking-widest opacity-20">
                 Secure Administrative Action
               </p>
             </motion.div>
@@ -418,19 +392,19 @@ const RoleDropdown = ({
     {
       id: "user",
       label: "Standard User",
-      desc: "Can browse products & place orders",
+      desc: "Browsing & Ordering",
       icon: <User size={18} />,
     },
     {
       id: "admin",
       label: "System Admin",
-      desc: "Can manage products & basic user data",
+      desc: "Resource Management",
       icon: <ShieldCheck size={18} />,
     },
     {
       id: "owner",
       label: "Platform Owner",
-      desc: "Full administrative & financial access",
+      desc: "Financial Control",
       icon: <Crown size={18} />,
     },
   ];
@@ -442,15 +416,15 @@ const RoleDropdown = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between pl-4 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) shadow-sm cursor-pointer"
+        className="w-full flex items-center justify-between px-6 py-4 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-bold text-(--color-dark) text-sm tracking-widest cursor-pointer"
       >
-        <div className="flex items-center gap-3">
-          <div className="text-(--color-tiger)">{selectedRole.icon}</div>
-          <span>{selectedRole.label}</span>
+        <div className="flex items-center gap-4">
+          <div className="text-(--color-dark)">{selectedRole.icon}</div>
+          <span className="uppercase">{selectedRole.label}</span>
         </div>
         <ChevronDown
           size={18}
-          className={`text-(--color-tiger) transition-transform ${
+          className={`text-(--color-dark) transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -464,10 +438,10 @@ const RoleDropdown = ({
               onClick={() => setIsOpen(false)}
             />
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              className="absolute top-full left-0 right-0 mt-2 z-50 bg-white/80 backdrop-blur-2xl border border-white/60 rounded-3xl shadow-2xl p-2 overflow-hidden"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="absolute top-full left-0 right-0 mt-2 z-50 bg-white border border-(--color-border) rounded-none shadow-2xl p-2"
             >
               {roles.map((role) => (
                 <button
@@ -477,37 +451,29 @@ const RoleDropdown = ({
                     onChange(role.id);
                     setIsOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between p-3 rounded-xl transition-all text-left group ${
+                  className={`w-full flex items-center justify-between p-4 rounded-none transition-all text-left group ${
                     value === role.id
-                      ? "bg-(--color-tiger) text-white shadow-md shadow-(--color-tiger)/20"
-                      : "hover:bg-white text-(--color-pakistan)/80"
+                      ? "bg-(--color-dark) text-white"
+                      : "hover:bg-(--color-gray-soft) text-(--color-dark)"
                   }`}
                 >
                   <div className="flex items-center gap-4">
                     <div
-                      className={`p-2 rounded-lg transition-colors ${
+                      className={`p-2 rounded-none transition-colors ${
                         value === role.id
                           ? "bg-white/20 text-white"
-                          : "bg-(--color-pakistan)/5 text-(--color-pakistan) group-hover:bg-(--color-tiger) group-hover:text-white"
+                          : "bg-gray-100 text-(--color-dark) group-hover:bg-white"
                       }`}
                     >
                       {role.icon}
                     </div>
                     <div>
-                      <p
-                        className={`font-black text-sm tracking-tight ${
-                          value === role.id
-                            ? "text-white"
-                            : "text-(--color-pakistan)"
-                        }`}
-                      >
+                      <p className="font-bold text-xs tracking-widest uppercase">
                         {role.label}
                       </p>
                       <p
-                        className={`text-[10px] font-bold uppercase tracking-wider ${
-                          value === role.id
-                            ? "text-white/60"
-                            : "text-(--color-pakistan)/40"
+                        className={`text-[9px] font-bold tracking-widest mt-0.5 ${
+                          value === role.id ? "text-white/60" : "opacity-40"
                         }`}
                       >
                         {role.desc}
@@ -516,9 +482,9 @@ const RoleDropdown = ({
                   </div>
                   {value === role.id && (
                     <motion.div
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      className="bg-white/20 p-1 rounded-full text-white"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="bg-white/20 p-1 rounded-none text-white"
                     >
                       <Check size={14} strokeWidth={4} />
                     </motion.div>

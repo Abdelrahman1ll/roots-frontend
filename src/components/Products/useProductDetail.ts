@@ -135,5 +135,6 @@ export default function useProductDetail() {
     setCurrentIndex,
     isFullScreen,
     setIsFullScreen,
+    user,
   };
 }

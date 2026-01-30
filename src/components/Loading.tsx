@@ -15,17 +15,24 @@ export default function Loading() {
           <h2 className="text-(--color-dark) font-light tracking-[1em] uppercase text-2xl select-none">
             {BRAND_NAME}
           </h2>
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "40px" }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-            className="h-px bg-(--color-dark) mt-4"
-          />
+          <div className="flex gap-2 mt-6">
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 bg-(--color-dark) rounded-full"
+                animate={{
+                  opacity: [0.3, 1, 0.3],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  delay: i * 0.1,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
         </motion.div>
 
         {/* Status Text - Subtle */}

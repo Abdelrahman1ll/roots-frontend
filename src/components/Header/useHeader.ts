@@ -79,18 +79,7 @@ export default function useHeader() {
     return () => clearTimeout(handler);
   }, [nameInput, setSearchParams, searchParams]);
 
-  const isUser = user?.role === "user";
-
-  const { data: cart, refetch: refetchCart } = useGetCartQuery(
-    {},
-    { skip: !isUser }
-  );
-
-  useEffect(() => {
-    if (isUser) {
-      refetchCart();
-    }
-  }, [isUser, refetchCart]);
+  const { data: cart } = useGetCartQuery({}, { skip: user?.role !== "user" });
 
   const totalItems: number = cart?.carts?.items.length || 0;
 
@@ -119,4 +108,4 @@ export default function useHeader() {
     desktopDropdownRef,
     mobileDropdownRef,
   };
-};
+}

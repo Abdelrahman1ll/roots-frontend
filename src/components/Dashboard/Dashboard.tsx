@@ -110,9 +110,9 @@ const CustomTick = (props: CustomTickProps) => {
         y={0}
         dy={16}
         textAnchor="middle"
-        fill="#606C38"
+        fill="#1A1A1A"
         fontWeight={700}
-        fontSize={13}
+        fontSize={11}
         className="md:hidden"
       >
         {payload?.value}
@@ -122,9 +122,9 @@ const CustomTick = (props: CustomTickProps) => {
         y={0}
         dy={16}
         textAnchor="middle"
-        fill="#606C38"
+        fill="#1A1A1A"
         fontWeight={700}
-        fontSize={13}
+        fontSize={11}
         className="hidden md:block"
       >
         {name}
@@ -151,10 +151,10 @@ export default function Dashboard() {
     monthlyStats = {},
   } = stats;
   const COLORS = [
-    "#BC6C25", // Tiger
-    "#DDA15E", // Earth
-    "#606C38", // Dark
-    "#283618", // Pakistan
+    "#1A1A1A", // Soft Black (--color-dark)
+    "#E5E5E5", // Light Gray
+    "#444444", // Secondary Text (--color-pakistan)
+    "#EEEEEE", // Border color
   ];
 
   // Totals Cards
@@ -236,25 +236,27 @@ export default function Dashboard() {
         <div
           key={year}
           onClick={() => setSelectedYear(year)}
-          className="group cursor-pointer flex-1 min-w-[250px] relative p-6 rounded-3xl bg-white/40 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:bg-white/60 transition-all duration-300"
+          className="group cursor-pointer flex-1 min-w-[250px] relative p-8 rounded-none bg-white border border-(--color-border) hover:border-(--color-dark) transition-all duration-300"
         >
-          <div className="flex justify-between items-center mb-4">
-            <div className="p-3 rounded-2xl bg-[#BC6C25]/10 text-[#BC6C25]">
-              <TrendingUp size={24} />
+          <div className="flex justify-between items-center mb-6">
+            <div className="p-3 bg-(--color-gray-soft) text-(--color-dark)">
+              <TrendingUp size={20} />
             </div>
-            <span className="text-2xl font-black text-[#283618]">{year}</span>
+            <span className="text-xl font-black text-(--color-dark) tracking-tighter">
+              {year}
+            </span>
           </div>
           <div>
-            <p className="text-[#606C38] text-xs font-bold uppercase tracking-widest mb-1">
+            <p className="text-(--color-pakistan) text-[10px] font-bold uppercase tracking-[0.2em] mb-2">
               Annual Revenue
             </p>
-            <p className="text-2xl font-black text-[#BC6C25]">
+            <p className="text-2xl font-black text-(--color-dark)">
               EGP {getYearTotal(year).toLocaleString()}
             </p>
           </div>
-          <div className="mt-4 flex items-center gap-2 text-[#606C38] text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-            <span>View Details</span>
-            <TrendingUp size={14} />
+          <div className="mt-6 flex items-center gap-2 text-(--color-dark) text-[11px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+            <span>Details</span>
+            <TrendingUp size={12} />
           </div>
         </div>
       ))}
@@ -267,14 +269,14 @@ export default function Dashboard() {
               setCompareYear(years[1]);
             }
           }}
-          className="group cursor-pointer flex-1 min-w-[250px] relative p-6 rounded-3xl bg-[#283618]/80 backdrop-blur-xl shadow-lg hover:shadow-2xl hover:bg-[#283618] transition-all duration-300 flex flex-col justify-center items-center text-center text-white"
+          className="group cursor-pointer flex-1 min-w-[250px] relative p-8 rounded-none bg-(--color-dark) shadow-lg hover:bg-black transition-all duration-300 flex flex-col justify-center items-center text-center text-white"
         >
-          <ArrowRightLeft size={32} className="mb-2 text-[#DDA15E]" />
-          <p className="text-lg font-black uppercase tracking-widest">
-            Compare Years
+          <ArrowRightLeft size={24} className="mb-3 text-white/50" />
+          <p className="text-sm font-black uppercase tracking-[0.2em]">
+            Compare
           </p>
-          <p className="text-xs font-medium opacity-60">
-            Compare performance over time
+          <p className="text-[10px] font-medium opacity-40 uppercase tracking-widest mt-1">
+            Historical Analysis
           </p>
         </div>
       )}
@@ -291,22 +293,22 @@ export default function Dashboard() {
               setSelectedYear(null);
               setCompareYear(null);
             }}
-            className="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/50 border border-white/50 text-[#606C38] font-bold hover:bg-white/80 transition-all active:scale-95"
+            className="w-full md:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-none bg-white border border-(--color-dark) text-(--color-dark) font-bold uppercase text-[11px] tracking-widest hover:bg-(--color-dark) hover:text-white transition-all active:scale-95"
           >
-            <ArrowBigLeft size={20} />
-            Back to Overview
+            <ArrowBigLeft size={16} />
+            BACK
           </button>
           <div className="text-left md:text-right w-full md:w-auto">
-            <h2 className="text-3xl font-black text-[#283618]">
-              {year} Performance
+            <h2 className="text-2xl font-black text-(--color-dark) uppercase tracking-tight">
+              {year} DETAIL
             </h2>
-            <p className="text-[#606C38] font-bold">
-              Monthly breakdown of revenue
+            <p className="text-(--color-pakistan) text-[10px] uppercase font-bold tracking-[0.2em] mt-1 space-x-2">
+              <span>MONTHLY PERFORMANCE</span>
             </p>
           </div>
         </div>
 
-        <div className="rounded-3xl shadow-xl p-4 bg-white/40 backdrop-blur-md border border-white/60">
+        <div className="rounded-none shadow-sm p-6 bg-white border border-(--color-border)">
           <div className="h-[400px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -329,7 +331,7 @@ export default function Dashboard() {
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: "#606C38", fontSize: 13, fontWeight: 700 }}
+                  tick={{ fill: "#1A1A1A", fontSize: 11, fontWeight: 700 }}
                   tickFormatter={(val) => `${val.toLocaleString()}`}
                 />
                 <Tooltip
@@ -343,9 +345,10 @@ export default function Dashboard() {
                 />
                 <Bar
                   dataKey="value"
-                  fill="#BC6C25"
-                  radius={[10, 10, 0, 0]}
+                  fill="#1A1A1A"
+                  radius={[0, 0, 0, 0]}
                   animationDuration={1500}
+                  barSize={40}
                 />
               </BarChart>
             </ResponsiveContainer>
@@ -377,51 +380,53 @@ export default function Dashboard() {
               setSelectedYear(null);
               setCompareYear(null);
             }}
-            className="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/50 border border-white/50 text-[#606C38] font-bold hover:bg-white/80 transition-all active:scale-95"
+            className="w-full md:w-auto flex items-center justify-center gap-2 px-8 py-3 rounded-none bg-white border border-(--color-dark) text-(--color-dark) font-bold uppercase text-[11px] tracking-widest hover:bg-(--color-dark) hover:text-white transition-all active:scale-95"
           >
-            <ArrowBigLeft size={20} />
-            Back to Overview
+            <ArrowBigLeft size={16} />
+            BACK
           </button>
           <div className="text-left md:text-right w-full md:w-auto">
-            <h2 className="text-3xl font-black text-[#283618]">
+            <h2 className="text-2xl font-black text-(--color-dark) uppercase tracking-tight">
               {y2} vs {y1}
             </h2>
-            <p className="text-[#606C38] font-bold">Comparative analysis</p>
+            <p className="text-(--color-pakistan) text-[10px] uppercase font-bold tracking-[0.2em] mt-1">
+              COMPARATIVE ANALYSIS
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-3xl bg-white/40 backdrop-blur-md text-center">
-            <p className="text-[#606C38] text-xs font-black uppercase tracking-widest mb-1">
-              {y2} Revenue
+          <div className="p-8 rounded-none bg-white border border-(--color-border) text-center">
+            <p className="text-(--color-pakistan) text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+              {y2} REVENUE
             </p>
-            <p className="text-3xl font-black text-[#283618]">
+            <p className="text-2xl font-black text-(--color-dark)">
               EGP {total2.toLocaleString()}
             </p>
           </div>
-          <div className="p-6 rounded-3xl bg-[#BC6C25] text-white shadow-xl flex flex-col justify-center items-center">
-            <p className="text-xs font-black uppercase tracking-widest mb-1 opacity-80">
-              Growth
+          <div className="p-8 rounded-none bg-(--color-dark) text-white shadow-lg flex flex-col justify-center items-center">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] mb-2 opacity-60">
+              GROWTH
             </p>
-            <div className="flex items-center gap-2">
-              <span className="text-4xl font-black">
+            <div className="flex items-center gap-3">
+              <span className="text-3xl font-black">
                 {growth > 0 ? "+" : ""}
                 {growth.toFixed(1)}%
               </span>
-              <TrendingUp size={32} />
+              <TrendingUp size={24} />
             </div>
           </div>
-          <div className="p-6 rounded-3xl bg-white/40 backdrop-blur-md text-center">
-            <p className="text-[#606C38] text-xs font-black uppercase tracking-widest mb-1">
-              {y1} Revenue
+          <div className="p-8 rounded-none bg-white border border-(--color-border) text-center">
+            <p className="text-(--color-pakistan) text-[10px] font-black uppercase tracking-[0.2em] mb-2">
+              {y1} REVENUE
             </p>
-            <p className="text-3xl font-black text-[#283618]">
+            <p className="text-2xl font-black text-(--color-dark)">
               EGP {total1.toLocaleString()}
             </p>
           </div>
         </div>
 
-        <div className="rounded-3xl shadow-xl p-6 bg-white/40 backdrop-blur-md border border-white/60">
+        <div className="rounded-none shadow-sm p-8 bg-white border border-(--color-border)">
           <div className="h-[400px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -444,7 +449,7 @@ export default function Dashboard() {
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: "#606C38" }}
+                  tick={{ fill: "#1A1A1A", fontSize: 11, fontWeight: 700 }}
                 />
                 <Tooltip
                   cursor={{ fill: "#BC6C25", opacity: 0.1 }}
@@ -458,14 +463,14 @@ export default function Dashboard() {
                 <Legend />
                 <Bar
                   dataKey={y2}
-                  fill="#DDA15E"
-                  radius={[10, 10, 0, 0]}
+                  fill="#E5E5E5"
+                  radius={[0, 0, 0, 0]}
                   animationDuration={1500}
                 />
                 <Bar
                   dataKey={y1}
-                  fill="#BC6C25"
-                  radius={[10, 10, 0, 0]}
+                  fill="#1A1A1A"
+                  radius={[0, 0, 0, 0]}
                   animationDuration={1500}
                 />
               </BarChart>
@@ -480,34 +485,47 @@ export default function Dashboard() {
       {isLoading ? (
         <Loading />
       ) : isError && (!dashboardOrders || !dashboardOrders.stats) ? (
-        <div className="flex justify-center items-center h-screen bg-[#FEFAE0]">
-          <div className="flex gap-2 text-[#BC6C25] font-bold text-xl">
-            <div>An error occurred while fetching data. Try again.</div>
+        <div className="flex justify-center items-center h-screen bg-white">
+          <div className="flex flex-col items-center gap-4 text-(--color-dark)">
+            <p className="font-bold uppercase tracking-[0.2em] text-xs">
+              An error occurred while fetching data
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-6 py-2 border border-(--color-dark) text-[10px] font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all"
+            >
+              Retry
+            </button>
           </div>
         </div>
       ) : (
         <div
           data-testid="dashboard-container"
-          className="p-4 md:p-8 min-h-screen space-y-8 bg-[#FEFAE0] overflow-x-hidden"
+          className="p-4 md:p-12 min-h-screen space-y-12 bg-white overflow-x-hidden"
         >
           {/* Header */}
           <div className="relative mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <h1 className="text-3xl md:text-5xl font-black text-[#283618] mb-2 font-display tracking-tight">
-                Dashboard Overview
+              <h1 className="text-3xl md:text-5xl font-black text-(--color-dark) mb-3 uppercase tracking-tighter">
+                DASHBOARD
               </h1>
-              <p className="text-[#606C38] font-medium tracking-widest uppercase text-xs md:text-sm opacity-80">
-                Welcome back to your control center
+              <p className="text-(--color-pakistan) font-bold tracking-[0.3em] uppercase text-[10px] opacity-60">
+                Administrative Control Center
               </p>
             </div>
             {!selectedYear && !compareYear && (
-              <div className="bg-[#BC6C25]/10 px-4 py-3 rounded-2xl border border-[#BC6C25]/20 w-full md:w-auto">
-                <p className="text-[#BC6C25] font-black text-xs uppercase tracking-tighter mb-1">
-                  Current Stats
+              <div className="bg-(--color-gray-soft) px-6 py-4 rounded-none border border-(--color-border) w-full md:w-auto">
+                <p className="text-(--color-dark) font-black text-[10px] uppercase tracking-[0.2em] mb-2 opacity-40">
+                  ANNUAL TARGET
                 </p>
-                <p className="text-[#283618] font-bold text-lg">
-                  {new Date().getFullYear()} Target: EGP 10M
-                </p>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-xl font-black text-(--color-dark)">
+                    EGP 10M
+                  </span>
+                  <span className="text-[10px] font-bold text-(--color-pakistan) uppercase tracking-widest">
+                    Target
+                  </span>
+                </div>
               </div>
             )}
           </div>
@@ -518,34 +536,24 @@ export default function Dashboard() {
               <div
                 key={i}
                 data-testid="stat-card"
-                className="group relative p-6 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/50 shadow-lg hover:shadow-2xl hover:bg-white/60 transition-all duration-300 overflow-hidden"
+                className="group relative p-8 rounded-none bg-white border border-(--color-border) hover:border-(--color-dark) transition-all duration-300"
               >
-                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
-                  {/* Giant Background Icon */}
-                  {React.cloneElement(
-                    item.icon as React.ReactElement<{ size: number | string }>,
-                    {
-                      size: 100,
-                    },
-                  )}
-                </div>
-
                 <div className="relative z-10 flex flex-col items-start gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-white/50 text-[#BC6C25] shadow-sm relative">
+                    <div className="p-3 bg-(--color-gray-soft) text-(--color-dark) relative">
                       {item.icon}
                       {item.length !== undefined && (
-                        <span className="absolute -top-2 -right-2 bg-[#BC6C25] text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-sm">
+                        <span className="absolute -top-1.5 -right-1.5 bg-(--color-dark) text-white text-[9px] font-black px-1.5 py-0.5 rounded-none shadow-sm">
                           {item.length}
                         </span>
                       )}
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-[#606C38] text-sm font-bold uppercase tracking-wider mb-1">
+                    <h3 className="text-(--color-pakistan) text-[10px] font-bold uppercase tracking-[0.2em] mb-2 opacity-60">
                       {item.title}
                     </h3>
-                    <p className="text-4xl font-black text-[#283618]">
+                    <p className="text-3xl font-black text-(--color-dark)">
                       {item.value || 0}
                     </p>
                   </div>
@@ -557,12 +565,12 @@ export default function Dashboard() {
           {/* Charts Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Pie Chart */}
-            <div className="rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-4 sm:p-6 bg-white/40 backdrop-blur-md border border-white/60">
-              <h3 className="text-xl font-black mb-6 flex items-center gap-3 text-[#283618]">
-                <div className="p-2 rounded-xl bg-[#BC6C25]/10 text-[#BC6C25]">
-                  <PieIcon size={20} />
+            <div className="rounded-none shadow-sm p-8 bg-white border border-(--color-border)">
+              <h3 className="text-sm font-black mb-8 flex items-center gap-3 text-(--color-dark) uppercase tracking-[0.2em]">
+                <div className="p-2 bg-(--color-gray-soft) text-(--color-dark)">
+                  <PieIcon size={16} />
                 </div>
-                Discounts Overview
+                Discounts
               </h3>
 
               <div className="h-[300px] w-full">
@@ -577,7 +585,7 @@ export default function Dashboard() {
                       innerRadius={80}
                       outerRadius={100}
                       paddingAngle={5}
-                      cornerRadius={8}
+                      cornerRadius={0}
                     >
                       {pieData?.map((_, index) => (
                         <Cell
@@ -589,21 +597,22 @@ export default function Dashboard() {
                     </Pie>
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: "rgba(255, 255, 255, 0.9)",
-                        borderRadius: "16px",
-                        border: "none",
-                        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-                        color: "#283618",
+                        backgroundColor: "rgba(255, 255, 255, 0.95)",
+                        borderRadius: "0px",
+                        border: "1px solid #EEEEEE",
+                        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.05)",
+                        color: "#1A1A1A",
                         fontWeight: "bold",
+                        fontSize: "11px",
                       }}
-                      itemStyle={{ color: "#283618" }}
+                      itemStyle={{ color: "#1A1A1A", textTransform: "uppercase" }}
                     />
                     <Legend
                       verticalAlign="bottom"
                       height={36}
-                      iconType="circle"
+                      iconType="rect"
                       formatter={(value) => (
-                        <span className="text-[#606C38] font-bold ml-1">
+                        <span className="text-(--color-pakistan) font-bold ml-1 text-[10px] uppercase tracking-widest">
                           {value}
                         </span>
                       )}
@@ -614,12 +623,12 @@ export default function Dashboard() {
             </div>
 
             {/* Order Status Chart */}
-            <div className="rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-4 sm:p-6 bg-white/40 backdrop-blur-md border border-white/60">
-              <h3 className="text-xl font-black mb-6 flex items-center gap-3 text-[#283618]">
-                <div className="p-2 rounded-xl bg-[#BC6C25]/10 text-[#BC6C25]">
-                  <TrendingUp size={20} />
+            <div className="rounded-none shadow-sm p-8 bg-white border border-(--color-border)">
+              <h3 className="text-sm font-black mb-8 flex items-center gap-3 text-(--color-dark) uppercase tracking-[0.2em]">
+                <div className="p-2 bg-(--color-gray-soft) text-(--color-dark)">
+                  <TrendingUp size={16} />
                 </div>
-                Orders Status
+                Order Status
               </h3>
 
               <div className="h-[300px] w-full" style={{ minHeight: "300px" }}>
@@ -638,28 +647,29 @@ export default function Dashboard() {
                       dataKey="name"
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: "#606C38", fontWeight: 700, fontSize: 12 }}
+                      tick={{ fill: "#1A1A1A", fontWeight: 700, fontSize: 10 }}
                       interval={0}
                     />
                     <YAxis
                       axisLine={false}
                       tickLine={false}
-                      tick={{ fill: "#606C38", fontSize: 12, fontWeight: 700 }}
+                      tick={{ fill: "#1A1A1A", fontSize: 10, fontWeight: 700 }}
                     />
                     <Tooltip
-                      cursor={{ fill: "#BC6C25", opacity: 0.1 }}
+                      cursor={{ fill: "#1A1A1A", opacity: 0.05 }}
                       contentStyle={{
                         backgroundColor: "rgba(255, 255, 255, 0.95)",
-                        borderRadius: "16px",
-                        border: "none",
-                        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
-                        color: "#283618",
+                        borderRadius: "0px",
+                        border: "1px solid #EEEEEE",
+                        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.05)",
+                        color: "#1A1A1A",
                         fontWeight: "bold",
+                        fontSize: "11px",
                       }}
                     />
                     <Bar
                       dataKey="value"
-                      radius={[10, 10, 0, 0]}
+                      radius={[0, 0, 0, 0]}
                       animationDuration={1500}
                       barSize={40}
                     >
@@ -682,11 +692,11 @@ export default function Dashboard() {
           <div className="space-y-6">
             {!selectedYear && !compareYear && (
               <>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 rounded-xl bg-[#BC6C25]/10 text-[#BC6C25]">
-                    <TrendingUp size={20} />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2 bg-(--color-gray-soft) text-(--color-dark)">
+                    <TrendingUp size={16} />
                   </div>
-                  <h3 className="text-xl font-black text-[#283618]">
+                  <h3 className="text-sm font-black text-(--color-dark) uppercase tracking-[0.2em]">
                     Annual Performance
                   </h3>
                 </div>
@@ -703,41 +713,41 @@ export default function Dashboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Top Customers */}
-            <div className="rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-4 sm:p-6 bg-white/40 backdrop-blur-md border border-white/60">
-              <h3 className="text-xl font-black mb-6 flex items-center gap-3 text-[#283618]">
-                <div className="p-2 rounded-xl bg-[#BC6C25]/10 text-[#BC6C25]">
-                  <Users size={20} />
+            <div className="rounded-none shadow-sm p-8 bg-white border border-(--color-border)">
+              <h3 className="text-sm font-black mb-8 flex items-center gap-3 text-(--color-dark) uppercase tracking-[0.2em]">
+                <div className="p-2 bg-(--color-gray-soft) text-(--color-dark)">
+                  <Users size={16} />
                 </div>
                 Top Customers
               </h3>
 
-              <div className="overflow-hidden rounded-2xl border border-[#283618]/5">
+              <div className="overflow-hidden rounded-none border border-(--color-border)">
                 <table className="min-w-full text-left">
                   <thead>
-                    <tr className="bg-[#283618]/5">
-                      <th className="p-4 text-xs font-black uppercase tracking-widest text-[#606C38]">
+                    <tr className="bg-(--color-gray-soft)">
+                      <th className="p-4 text-[10px] font-black uppercase tracking-[0.2em] text-(--color-pakistan)">
                         Customer
                       </th>
-                      <th className="p-4 text-xs font-black uppercase tracking-widest text-[#606C38] text-right">
+                      <th className="p-4 text-[10px] font-black uppercase tracking-[0.2em] text-(--color-pakistan) text-right">
                         Orders
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#283618]/5 bg-white/30">
+                  <tbody className="divide-y divide-(--color-border) bg-white">
                     {topCustomers?.map((item: TopCustomerItem, i: number) => (
                       <tr
                         key={i}
                         className="hover:bg-white/50 transition-colors duration-200"
                       >
-                        <td className="p-4 font-bold text-[#283618]">
+                        <td className="p-4 font-bold text-(--color-dark) text-[11px]">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-[#DDA15E] flex items-center justify-center text-white font-bold text-xs shadow-inner">
+                            <div className="w-8 h-8 rounded-none bg-(--color-dark) flex items-center justify-center text-white font-bold text-xs">
                               {item.email.charAt(0).toUpperCase()}
                             </div>
                             {item.email}
                           </div>
                         </td>
-                        <td className="p-4 font-black text-[#BC6C25] text-right text-lg">
+                        <td className="p-4 font-black text-(--color-dark) text-right text-lg tracking-tighter">
                           {item.count}
                         </td>
                       </tr>
@@ -748,12 +758,12 @@ export default function Dashboard() {
             </div>
 
             {/* Profits & Costs */}
-            <div className="rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-4 sm:p-6 bg-white/40 backdrop-blur-md border border-white/60">
-              <h3 className="text-xl font-black mb-6 flex items-center gap-3 text-[#283618]">
-                <div className="p-2 rounded-xl bg-[#BC6C25]/10 text-[#BC6C25]">
-                  <DollarSign size={20} />
+            <div className="rounded-none shadow-sm p-8 bg-white border border-(--color-border)">
+              <h3 className="text-sm font-black mb-8 flex items-center gap-3 text-(--color-dark) uppercase tracking-[0.2em]">
+                <div className="p-2 bg-(--color-gray-soft) text-(--color-dark)">
+                  <DollarSign size={16} />
                 </div>
-                Financial Overview
+                Financials
               </h3>
 
               <div className="space-y-4">
@@ -761,47 +771,38 @@ export default function Dashboard() {
                   {
                     label: "Wholesale",
                     value: costs?.totalWholesalePrice,
-                    color: "#DDA15E",
                   },
                   {
                     label: "Marketing",
                     value: costs?.totalMarketingCosts,
-                    color: "#DDA15E",
                   },
                   {
                     label: "Packaging",
                     value: costs?.totalPackagingCost,
-                    color: "#DDA15E",
                   },
                   {
                     label: "Delivery",
                     value: costs?.deliveryPrice,
-                    color: "#DDA15E",
                   },
                   {
                     label: "Net Profit",
                     value: costs?.totalNetProfit,
-                    color: "#16a34a",
                     highlight: true,
                   },
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className={`flex items-center justify-between p-4 rounded-2xl ${
-                      item.highlight
-                        ? "bg-green-100/50 border border-green-200"
-                        : "bg-white/30 hover:bg-white/50 transition-colors border border-transparent hover:border-white/50"
-                    }`}
+                    className={`flex items-center justify-between p-5 rounded-none ${
+                        item.highlight
+                          ? "bg-(--color-gray-soft) border-l-4 border-black"
+                          : "bg-white hover:bg-(--color-gray-soft) transition-colors border border-(--color-border)"
+                      }`}
                   >
-                    <span className="font-bold text-[#606C38] uppercase text-xs tracking-widest">
+                    <span className="font-bold text-(--color-pakistan) uppercase text-[10px] tracking-[0.2em]">
                       {item.label}
                     </span>
-                    <span
-                      className={`text-xl font-black ${
-                        item.highlight ? "text-green-600" : "text-[#283618]"
-                      }`}
-                    >
-                      EGP {item.value?.toLocaleString()}
+                    <span className="text-xl font-black text-(--color-dark) tracking-tighter">
+                      EGP {item.value?.toLocaleString() || 0}
                     </span>
                   </div>
                 ))}

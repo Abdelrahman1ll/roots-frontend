@@ -16,7 +16,7 @@ export default function AllUsers() {
   const users = Array.isArray(getUsers) ? getUsers : getUsers?.users || [];
 
   const filteredUsers = users.filter((user: UserType) =>
-    user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    user.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   const containerVariants = {
@@ -30,51 +30,49 @@ export default function AllUsers() {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,var(--color-tiger-10),transparent),radial-gradient(circle_at_bottom_left,var(--color-pakistan-10),transparent)] flex flex-col items-center py-2 px-4 md:px-8 mt-18 overflow-x-hidden">
+    <div className="min-h-screen bg-white flex flex-col items-center py-12 px-4 md:px-8 mt-18 overflow-x-hidden">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-4xl text-center mb-12"
+        className="w-full max-w-4xl text-left mb-16 border-b border-(--color-border) pb-8"
       >
-        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-(--color-pakistan)/5 border border-(--color-pakistan)/10 text-(--color-pakistan) mb-4">
-          <Users size={16} />
-          <span className="text-[10px] font-black uppercase tracking-[0.2em]">
+        <div className="flex items-center gap-3 text-(--color-pakistan) mb-6">
+          <Users size={20} />
+          <span className="text-[10px] font-black tracking-widest">
             Administration Panel
           </span>
         </div>
-        <h1 className="text-4xl md:text-5xl font-black text-(--color-pakistan) tracking-tight mb-4">
+        <h1 className="text-4xl md:text-6xl font-black text-(--color-dark) tracking-tighter mb-4">
           User Management
         </h1>
-        <p className="text-(--color-pakistan)/60 font-medium max-w-lg mx-auto leading-relaxed">
-          Overview of all registered style enthusiasts in your boutique
-          community.
+        <p className="text-(--color-pakistan) font-bold tracking-widest uppercase text-[10px] opacity-60">
+          Complete overview of your boutique community and member database.
         </p>
       </motion.div>
 
       {/* Search Bar Container */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full max-w-2xl px-4 sm:px-0 mb-8 relative group mx-auto"
+        className="w-full max-w-4xl mb-12 relative"
       >
-        <div className="absolute inset-0 bg-(--color-tiger)/5 blur-2xl -z-10 group-focus-within:bg-(--color-tiger)/10 transition-colors" />
         <div className="relative">
           <input
             type="text"
             placeholder="Filter by email address..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-14 py-5 bg-white/60 backdrop-blur-xl border border-white/40 rounded-3xl shadow-xl shadow-gray-200/20 focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) text-center sm:text-left"
+            className="w-full px-16 py-6 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-bold text-(--color-dark) text-sm tracking-widest placeholder:text-gray-300"
           />
           <Search
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-(--color-pakistan)/40 transition-colors group-focus-within:text-(--color-tiger)"
-            size={22}
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-(--color-dark)"
+            size={20}
           />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm("")}
-              className="absolute right-6 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="absolute right-6 top-1/2 -translate-y-1/2 p-2 hover:bg-gray-100 transition-colors"
             >
               <X size={16} className="text-gray-400" />
             </button>
@@ -96,7 +94,7 @@ export default function AllUsers() {
               {[1, 2, 3, 4, 5].map((i) => (
                 <div
                   key={i}
-                  className="w-full h-24 bg-white/40 animate-pulse rounded-3xl"
+                  className="w-full h-24 bg-gray-50 animate-pulse rounded-none border border-(--color-border)"
                 />
               ))}
             </motion.div>
@@ -109,49 +107,39 @@ export default function AllUsers() {
               className="grid gap-4"
             >
               {filteredUsers.map((user: UserType) => (
-                <motion.div
-                  key={user.id}
-                  className="w-full flex justify-center px-4"
-                >
+                <motion.div key={user.id} className="w-full">
                   <Link
                     to={`/edit-user-owner/${user?.id}`}
-                    className="w-full max-w-[420px] sm:max-w-4xl"
+                    className="block w-full"
                   >
-                    <div className="bg-white/40 backdrop-blur-xl border border-white/60 p-4 sm:p-5 rounded-4xl shadow-xl shadow-gray-200/5 flex flex-col sm:flex-row items-center sm:justify-between gap-4 sm:gap-6 hover:shadow-2xl hover:bg-white/80 transition-all duration-300 group overflow-hidden">
+                    <div className="bg-white border border-(--color-border) p-6 rounded-none flex flex-col sm:flex-row items-center sm:justify-between gap-6 hover:border-(--color-dark) transition-all duration-300 group relative">
                       {/* Left: Icon & User Info */}
-                      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto">
-                        <div className="w-14 h-14 sm:w-12 sm:h-12 bg-linear-to-br from-(--color-tiger) to-(--color-earth) rounded-2xl flex items-center justify-center text-white shadow-lg shadow-(--color-tiger)/20 transform group-hover:rotate-6 transition-transform shrink-0">
-                          <User
-                            size={28}
-                            className="sm:w-6 sm:h-6"
-                            strokeWidth={2.5}
-                          />
+                      <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+                        <div className="w-12 h-12 bg-(--color-gray-soft) rounded-none flex items-center justify-center text-(--color-dark) group-hover:bg-(--color-dark) group-hover:text-white transition-colors">
+                          <User size={20} strokeWidth={2.5} />
                         </div>
 
                         <div className="flex flex-col items-center sm:items-start text-center sm:text-left min-w-0 flex-1">
                           <div className="flex items-center gap-2 justify-center sm:justify-start w-full">
                             <Mail
                               size={12}
-                              className="text-(--color-tiger) shrink-0"
+                              className="text-(--color-pakistan) opacity-40 shrink-0"
                             />
-                            <p className="font-black text-(--color-pakistan) tracking-tight break-all line-clamp-1 sm:line-clamp-none max-w-[240px] sm:max-w-none">
+                            <p className="font-black text-(--color-dark) tracking-tight text-sm">
                               {user.email}
                             </p>
                           </div>
-                          <p className="text-[10px] font-bold text-(--color-pakistan)/40 uppercase tracking-widest mt-1">
+                          <p className="text-[10px] font-bold text-(--color-pakistan) opacity-40 uppercase tracking-widest mt-1">
                             ID: #{String(user.id).slice(-8)}
                           </p>
                         </div>
                       </div>
 
-                      {/* Right: Date & Arrow */}
-                      <div className="flex flex-row sm:flex-row items-center gap-6 sm:gap-8 w-full sm:w-auto justify-center sm:justify-end pt-4 sm:pt-0 border-t border-white/40 sm:border-none">
+                      {/* Right: Date & Role (simplified) */}
+                      <div className="flex flex-row items-center gap-8 w-full sm:w-auto justify-center sm:justify-end pt-4 sm:pt-0 border-t sm:border-none border-gray-100 text-(--color-dark)">
                         <div className="flex flex-col items-center sm:items-end">
-                          <div className="flex items-center gap-2 text-xs font-black text-(--color-pakistan)/60">
-                            <Calendar
-                              size={14}
-                              className="text-(--color-tiger)/60"
-                            />
+                          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
+                            <Calendar size={14} className="opacity-40" />
                             <span>
                               {user.createdAt
                                 ? new Date(user.createdAt).toLocaleDateString(
@@ -160,18 +148,18 @@ export default function AllUsers() {
                                       month: "short",
                                       day: "numeric",
                                       year: "numeric",
-                                    }
+                                    },
                                   )
                                 : "N/A"}
                             </span>
                           </div>
-                          <span className="text-[9px] font-black uppercase tracking-widest text-(--color-tiger)/40 mt-0.5">
-                            Member Since
+                          <span className="text-[9px] font-bold tracking-widest text-(--color-pakistan) opacity-40 mt-1">
+                            Joined
                           </span>
                         </div>
 
-                        <div className="w-10 h-10 rounded-full bg-(--color-pakistan)/5 flex items-center justify-center text-(--color-pakistan) transform group-hover:translate-x-1 transition-transform shrink-0 ring-4 ring-white/20">
-                          <ArrowRight size={20} />
+                        <div className="w-10 h-10 rounded-none bg-(--color-gray-soft) flex items-center justify-center group-hover:bg-(--color-dark) group-hover:text-white transition-all">
+                          <ArrowRight size={18} />
                         </div>
                       </div>
                     </div>
@@ -182,32 +170,32 @@ export default function AllUsers() {
           ) : (
             <motion.div
               key="empty"
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-20 bg-white/40 backdrop-blur-xl rounded-[3rem] border border-white/60 shadow-xl"
+              className="text-center py-24 bg-white rounded-none border border-(--color-border)"
             >
-              <div className="w-20 h-20 bg-(--color-pakistan)/5 rounded-3xl flex items-center justify-center mx-auto mb-6 text-(--color-pakistan)/20">
-                <Search size={40} />
+              <div className="w-16 h-16 bg-(--color-gray-soft) rounded-none flex items-center justify-center mx-auto mb-8 text-(--color-dark)">
+                <Search size={32} />
               </div>
-              <h3 className="text-2xl font-black text-(--color-pakistan) mb-2">
-                No mirrors matching that style
+              <h3 className="text-xl font-black text-(--color-dark) tracking-tighter mb-2">
+                No members found
               </h3>
-              <p className="text-(--color-pakistan)/60 font-medium">
+              <p className="text-(--color-pakistan) font-bold text-[10px] uppercase tracking-widest opacity-40">
                 Try searching for a different email address.
               </p>
               <button
                 onClick={() => setSearchTerm("")}
-                className="mt-6 text-xs font-black uppercase tracking-widest text-(--color-tiger) hover:underline"
+                className="mt-8 text-[10px] font-black tracking-widest text-(--color-dark) hover:opacity-60 transition-opacity border-b border-black pb-1"
               >
-                Clear Search
+                RESET SEARCH
               </button>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      <p className="mt-12 text-[9px] font-black text-(--color-pakistan)/20 uppercase tracking-[0.4em]">
-        Total Boutique Members: {users.length}
+      <p className="mt-16 text-[9px] font-black text-(--color-pakistan) opacity-20 tracking-widest">
+        Total Members: {users.length}
       </p>
     </div>
   );

@@ -5,8 +5,10 @@ import {
   ChevronRight,
   Heart,
   PackageSearch,
+  SquarePen,
   X,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import type { ProductSizeType } from "../../types/ProductType";
 import MotionZoomImage from "./ImageZoom";
 import useProductDetail from "./useProductDetail";
@@ -38,6 +40,7 @@ export default function ProductDetail() {
     setCurrentIndex,
     isFullScreen,
     setIsFullScreen,
+    user,
   } = useProductDetail();
 
   const [isFullscreenZoomed, setIsFullscreenZoomed] = useState(false);
@@ -54,7 +57,7 @@ export default function ProductDetail() {
   };
   return (
     <>
-      {isLoading && !isFetching ? (
+      {isLoading && isFetching ? (
         <div className="flex flex-col md:flex-row items-start justify-center gap-10 m-4 mt-12">
           {/* الجزء الأيسر skeleton */}
           <div className="w-full md:w-1/2 animate-pulse flex flex-col gap-4">
@@ -200,6 +203,16 @@ export default function ProductDetail() {
               <h2 className="text-3xl md:text-5xl font-black tracking-tight text-(--color-dark) leading-[1.05] uppercase">
                 {product?.name}
               </h2>
+
+              {(user?.role === "owner" || user?.role === "admin") && (
+                <Link
+                  to={`/edit-product/${product.id}`}
+                  className="w-fit flex items-center gap-2 px-4 py-2 bg-gray-100/50 hover:bg-gray-100 border border-gray-200 text-gray-600 text-[10px] font-bold uppercase tracking-wider transition-all"
+                >
+                  <SquarePen size={14} />
+                  <span>Edit Product</span>
+                </Link>
+              )}
             </div>
 
             {/* السعر بريميوم */}

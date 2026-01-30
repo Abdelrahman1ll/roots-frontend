@@ -81,10 +81,10 @@ export const detectUserGovernorate = async (): Promise<{
 
   // --- Step 1: IP-based Geolocation (No permission prompt) ---
   try {
-    const ipResponse = await fetch("https://ipapi.co/json/");
+    const ipResponse = await fetch("https://ipwho.is/");
     const ipData = await ipResponse.json();
 
-    if (ipData && ipData.country_name === "Egypt") {
+    if (ipData && ipData.success && ipData.country === "Egypt") {
       const potentialNames = [ipData.region, ipData.city];
       for (const name of potentialNames) {
         if (!name) continue;

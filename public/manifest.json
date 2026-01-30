@@ -1,29 +1,10 @@
 {
-  "name": "ROOTS - Modern Fashion Store",
+  "name": "ROOTS - ROOTS Fashion Store",
   "short_name": "ROOTS",
-  "description": "ROOTS - Modern Fashion Store | متجر الأزياء العصرية",
+  "description": "ROOTS - ROOTS Fashion Store | متجر الأزياء العصرية",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FEFAE0",
   "theme_color": "#BC6C25",
-  "icons": [
-    {
-      "src": "/vite.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/vite.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/vite.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
-  ]
+  "icons": []
 }

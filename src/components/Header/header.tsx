@@ -164,7 +164,7 @@ export default function Header() {
         </div>
       </header>
 
-      <header className="sticky top-0 z-40 bg-white border-b border-(--color-border) py-5 px-8 min-[1180px]:hidden">
+      <header className="sticky top-0 z-40 bg-white border-b border-(--color-border) py-4 px-8 min-[1180px]:hidden">
         <div className="w-full flex items-center justify-between">
           <motion.button
             whileTap={{ scale: 0.9 }}

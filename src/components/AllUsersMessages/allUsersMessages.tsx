@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useSendEmailMutation } from "../../redux/Email/apiEmail";
 import { toast } from "react-toastify";
-import { Mail, MessageSquareText, Send, Megaphone } from "lucide-react";
+import { Send, Megaphone } from "lucide-react";
 
 export default function AllUsersMessages() {
   const [sendEmail, { isLoading }] = useSendEmailMutation();
@@ -32,61 +32,57 @@ export default function AllUsersMessages() {
   };
 
   return (
-    <div className="relative min-h-screen py-10 px-4">
-      {/* Dynamic Radial Background */}
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(188,108,37,0.1)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(96,108,56,0.05)_0%,transparent_50%)]" />
-
+    <div className="relative min-h-screen py-16 px-4 bg-white">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 text-center"
+          className="mb-12"
         >
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-white/60 text-(--color-tiger) font-black text-xs uppercase tracking-widest mb-4">
-            <Megaphone size={14} />
-            Communication Hub
+          <div className="inline-flex items-center gap-2 mb-6">
+            <Megaphone size={18} className="text-black" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-black/70">
+              Communication Hub
+            </span>
           </div>
-          <h1 className="text-4xl font-black text-(--color-pakistan) tracking-tight mb-2">
-            Broadcast Message
+          <h1 className="text-5xl font-light text-black tracking-tight mb-4">
+            Broadcast message
           </h1>
-          <p className="text-(--color-pakistan)/60 font-medium font-['Outfit']">
-            Send important updates and newsletters to all your customers
+          <p className="text-black/70 text-base max-w-lg leading-relaxed">
+            Send important updates and newsletters to all your customers. Ensure
+            your message aligns with the brand voice.
           </p>
         </motion.div>
 
-        {/* Main Card */}
+        {/* Main Form */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="relative rounded-[2.5rem] overflow-hidden border border-white/60 bg-white/40 backdrop-blur-xl shadow-2xl p-8 sm:p-10"
+          className="bg-white border border-black/10 p-8 md:p-12 shadow-sm"
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-10">
             {/* Subject Input */}
-            <div className="group space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-(--color-pakistan)/60 ml-2">
-                Subject Line
+            <div className="space-y-4">
+              <label className="text-sm font-bold text-black uppercase tracking-wider">
+                Subject line
               </label>
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Ex: Big Summer Sale Starts Now!"
+                  placeholder="e.g. New Collection Available"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/50 border border-white/60 focus:bg-white/80 focus:border-(--color-tiger) outline-none transition-all font-bold text-(--color-pakistan) placeholder:text-(--color-pakistan)/30 shadow-inner"
-                />
-                <Mail
-                  size={20}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-(--color-pakistan)/40 group-focus-within:text-(--color-tiger) transition-colors"
+                  className="w-full px-0 py-4 border-b-2 border-black/10 focus:border-black outline-none transition-all text-xl text-black placeholder:text-black/30 bg-transparent font-medium"
                 />
               </div>
             </div>
 
             {/* Message Input */}
-            <div className="group space-y-2">
-              <label className="text-xs font-black uppercase tracking-widest text-(--color-pakistan)/60 ml-2">
-                Message Content
+            <div className="space-y-4">
+              <label className="text-sm font-bold text-black uppercase tracking-wider">
+                Message content
               </label>
               <div className="relative">
                 <textarea
@@ -94,11 +90,7 @@ export default function AllUsersMessages() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={8}
-                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/50 border border-white/60 focus:bg-white/80 focus:border-(--color-tiger) outline-none transition-all font-bold text-(--color-pakistan) placeholder:text-(--color-pakistan)/30 shadow-inner resize-none"
-                />
-                <MessageSquareText
-                  size={20}
-                  className="absolute left-4 top-6 text-(--color-pakistan)/40 group-focus-within:text-(--color-tiger) transition-colors"
+                  className="w-full px-0 py-4 border-b-2 border-black/10 focus:border-black outline-none transition-all text-lg text-black placeholder:text-black/30 bg-transparent resize-none leading-relaxed"
                 />
               </div>
             </div>
@@ -106,41 +98,43 @@ export default function AllUsersMessages() {
             {/* Status Messages */}
             {success && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="bg-green-500/10 text-green-700 p-4 rounded-xl text-center font-bold border border-green-500/20"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-black text-lg font-bold py-3 border-l-4 border-black pl-6 bg-black/5"
               >
-                Message sent successfully to all customers!
+                Message sent successfully to all customers.
               </motion.div>
             )}
 
             {error && (
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="bg-red-500/10 text-red-600 p-4 rounded-xl text-center font-bold border border-red-500/20"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-red-600 text-lg font-bold py-3 border-l-4 border-red-600 pl-6 bg-red-50"
               >
                 {error}
               </motion.div>
             )}
 
             {/* Send Button */}
-            <motion.button
-              onClick={handleSendMessage}
-              disabled={isLoading || !subject || !message}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full py-4 rounded-2xl bg-linear-to-r from-(--color-tiger) to-(--color-earth) text-white font-black uppercase tracking-widest text-xs shadow-xl shadow-(--color-tiger)/20 transition-all flex items-center justify-center gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                "Sending Broadcast..."
-              ) : (
-                <>
-                  <Send size={16} />
-                  Send to All Customers
-                </>
-              )}
-            </motion.button>
+            <div className="pt-6">
+              <motion.button
+                onClick={handleSendMessage}
+                disabled={isLoading || !subject || !message}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                className="px-12 py-5 bg-black text-white text-xs font-black uppercase tracking-[0.3em] transition-all flex items-center justify-center gap-4 disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    <Send size={18} />
+                    Send broadcast
+                  </>
+                )}
+              </motion.button>
+            </div>
           </div>
         </motion.div>
       </div>

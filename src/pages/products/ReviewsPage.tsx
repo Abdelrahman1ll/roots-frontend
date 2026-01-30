@@ -11,9 +11,7 @@ export default function ReviewsPage() {
       <Header />
       <BackButton />
 
-      <div className="pt-10">
-        <Reviews hideForm={true} />
-      </div>
+      <Reviews hideForm={true} />
 
       <Footer />
     </>

@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
     // Content Security Policy (CSP): Protect against XSS and data injection
     // سياسة أمان المحتوى: حماية الموقع من هجمات حقن الأكواد الضارة (XSS)
     "Content-Security-Policy":
-      "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://cdn.jsdelivr.net https://js.stripe.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https: blob:; connect-src 'self' https://accounts.google.com https://*.cloudinary.com https://*.paymob.com https://api.stripe.com https://formspree.io https://api.bigdatacloud.net ws: wss:; frame-src 'self' https://accounts.google.com https://*.paymob.com https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com; worker-src 'self' blob:; media-src 'self' data:;",
+      "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://cdn.jsdelivr.net https://js.stripe.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https: blob:; connect-src 'self' https://accounts.google.com https://*.cloudinary.com https://*.paymob.com https://api.stripe.com https://formspree.io https://api.bigdatacloud.net https://ipwho.is ws: wss:; frame-src 'self' https://accounts.google.com https://*.paymob.com https://js.stripe.com https://hooks.stripe.com https://checkout.stripe.com; worker-src 'self' blob:; media-src 'self' data:;",
   };
 
   return {

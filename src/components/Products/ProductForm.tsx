@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  PlusCircle,
   Package,
-  Tag,
-  Palette,
-  DollarSign,
-  Type,
-  FileText,
-  Ruler,
-  Layers,
   ChevronDown,
   Check,
   Save,
   Trash2,
-  Box,
-  Truck,
-  Zap,
   Loader2,
+  PlusCircle,
 } from "lucide-react";
 import useProductForm, {
   type ErrorProductType,
@@ -44,12 +34,10 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
     categories,
     isLoadingCategory,
     isErrorCategory,
-    nameCategory,
     setNameCategory,
     colors,
     isLoadingColors,
     isErrorColors,
-    nameColors,
     setNameColors,
   } = useProductForm(mode);
 
@@ -71,7 +59,7 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top_right,var(--color-tiger-10),transparent),radial-gradient(circle_at_bottom_left,var(--color-pakistan-10),transparent)] flex flex-col items-center py-6 px-4 md:px-6">
+    <div className="min-h-screen bg-(--color-cornsilk) flex flex-col items-center py-12 px-4 md:px-6">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -79,58 +67,54 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
         className="w-full max-w-4xl"
       >
         {/* Header Section */}
-        <motion.div variants={itemVariants} className="text-center mb-8">
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-(--color-pakistan)/5 border border-(--color-pakistan)/10 text-(--color-pakistan) mb-4">
-            <Package size={16} className="text-(--color-tiger)" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em]">
-              Product Management
+        <motion.div
+          variants={itemVariants}
+          className="text-left mb-12 border-b border-(--color-border) pb-8"
+        >
+          <div className="inline-flex items-center gap-3 mb-4">
+            <Package size={20} className="text-(--color-dark)" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-(--color-pakistan)">
+              Administrative Panel
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-(--color-pakistan) tracking-tight mb-4">
-            {mode === "add" ? "Create Product" : "Edit Product"}
+          <h1 className="text-3xl md:text-4xl font-bold text-(--color-dark) tracking-tight mb-4">
+            {mode === "add" ? "New product" : "Edit product"}
           </h1>
-          <p className="text-(--color-pakistan)/60 font-medium max-w-lg mx-auto leading-relaxed">
-            Configure product details, visuals, and inventory specifications
-            with precision.
+          <p className="text-(--color-pakistan) font-medium max-w-lg leading-relaxed text-sm">
+            Specify the core attributes and visual assets for this catalog item.
           </p>
         </motion.div>
 
         {/* Form Card */}
         <motion.div
           variants={itemVariants}
-          className="bg-white/40 backdrop-blur-2xl border border-white/60 p-4 md:p-10 rounded-[2.5rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.05)]"
+          className="bg-white border border-(--color-border) p-6 md:p-12 rounded-none shadow-sm"
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Basic Info */}
-            <section className="space-y-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-(--color-tiger)/10 rounded-xl text-(--color-tiger)">
-                  <Type size={20} />
-                </div>
-                <h3 className="text-xl font-black text-(--color-pakistan) tracking-tight">
-                  Identity & Valuation
+            <section className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <h3 className="text-lg font-bold text-(--color-dark) tracking-widest">
+                  Personal details
                 </h3>
               </div>
 
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 {[
                   {
-                    label: "Product Name",
+                    label: "Product name",
                     name: "name",
                     type: "text",
-                    icon: <Package size={18} />,
                   },
                   {
                     label: "Price",
                     name: "price",
                     type: "number",
-                    icon: <DollarSign size={18} />,
                   },
                   {
-                    label: "Promo Price",
+                    label: "Promo price",
                     name: "promotionalPrice",
                     type: "number",
-                    icon: <Tag size={18} />,
                   },
                 ].map((input) => (
                   <div
@@ -139,13 +123,10 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                       input.name === "name" ? "col-span-2" : "col-span-1"
                     }`}
                   >
-                    <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                    <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
                       {input.label}
                     </label>
                     <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-(--color-tiger) transition-transform group-focus-within:scale-110">
-                        {input.icon}
-                      </div>
                       <input
                         type={input.type}
                         name={input.name}
@@ -157,11 +138,11 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                         }
                         placeholder={input.label}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm"
                       />
                     </div>
                     {errors[input.name as keyof ErrorProductType] && (
-                      <p className="text-red-500 text-[10px] font-bold ml-1">
+                      <p className="text-red-500 text-[10px] font-medium mt-1">
                         {errors[input.name as keyof ErrorProductType] as string}
                       </p>
                     )}
@@ -170,18 +151,19 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
               </div>
 
               {/* Selections - Categories & Colors */}
-              <div className="grid grid-cols-1 gap-4 sm:gap-6">
-                <div className="space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
-                    Category
-                  </label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
+                      Category
+                    </label>
+                  </div>
                   <ProductDropdown
                     value={formData.category}
-                    label={nameCategory || "Select Category"}
+                    label="Select Category"
                     items={categories?.categories || []}
                     isLoading={isLoadingCategory}
                     isError={isErrorCategory}
-                    icon={<Layers size={18} />}
                     onChange={(id, name) => {
                       handleChange({
                         target: { name: "category", value: id },
@@ -196,17 +178,19 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                   )}
                 </div>
 
-                <div className="space-y-1.5 focus-within:z-10">
-                  <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
-                    Primary Color
-                  </label>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
+                      Primary color
+                    </label>
+                  </div>
                   <ProductDropdown
                     value={formData.colors}
-                    label={nameColors || "Select Color"}
+                    label="Select Color"
                     items={colors?.colors || []}
                     isLoading={isLoadingColors}
                     isError={isErrorColors}
-                    icon={<Palette size={18} />}
+                    showSwatches={true}
                     onChange={(id, name) => {
                       handleChange({
                         target: { name: "colors", value: id },
@@ -223,21 +207,18 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
               </div>
 
               {/* Description */}
-              <div className="space-y-1.5 focus-within:z-10">
-                <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
-                  Product Description
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
+                  Description
                 </label>
                 <div className="relative group">
-                  <div className="absolute left-4 top-4 text-(--color-tiger)">
-                    <FileText size={18} />
-                  </div>
                   <textarea
                     name="description"
                     rows={4}
                     value={formData.description}
                     onChange={handleChange}
-                    placeholder="Describe the product features and benefits..."
-                    className="w-full pl-12 pr-4 py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm min-h-[120px] resize-none"
+                    placeholder="Provide a detailed description of the product..."
+                    className="w-full px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm min-h-[120px] resize-none"
                   />
                 </div>
                 {errors.description && (
@@ -249,40 +230,29 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
             </section>
 
             {/* Logistics & Inventory */}
-            <section className="space-y-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-(--color-tiger)/10 rounded-xl text-(--color-tiger)">
-                  <Box size={20} />
-                </div>
-                <h3 className="text-xl font-black text-(--color-pakistan) tracking-tight">
-                  Inventory & Logistics
+            <section className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <h3 className="text-lg font-bold text-(--color-dark) tracking-widest">
+                  Inventory & logistics
                 </h3>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-2 gap-4 sm:gap-6">
                 {[
                   {
-                    label: "Total Stock",
+                    label: "Total stock",
                     name: "stock",
-                    icon: <Layers size={18} />,
                   },
                   {
-                    label: "Wholesale Price",
+                    label: "Wholesale price",
                     name: "wholesalePrice",
-                    icon: <DollarSign size={18} />,
                   },
                 ].map((input) => (
-                  <div
-                    key={input.name}
-                    className="space-y-1.5 focus-within:z-10"
-                  >
-                    <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                  <div key={input.name} className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-(--color-pakistan) uppercase tracking-widest">
                       {input.label}
                     </label>
                     <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-(--color-tiger)">
-                        {input.icon}
-                      </div>
                       <input
                         type="number"
                         name={input.name}
@@ -293,11 +263,11 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                         }
                         placeholder={input.label}
                         onChange={handleChange}
-                        className="w-full pl-12 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm"
                       />
                     </div>
                     {errors[input.name as keyof ErrorProductType] && (
-                      <p className="text-red-500 text-[10px] font-bold ml-1">
+                      <p className="text-red-500 text-[10px] font-medium mt-1">
                         {errors[input.name as keyof ErrorProductType] as string}
                       </p>
                     )}
@@ -307,40 +277,29 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
             </section>
 
             {/* Financial Overhead */}
-            <section className="space-y-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-(--color-tiger)/10 rounded-xl text-(--color-tiger)">
-                  <Zap size={20} />
-                </div>
-                <h3 className="text-xl font-black text-(--color-pakistan) tracking-tight">
-                  Expense Monitoring
+            <section className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <h3 className="text-lg font-bold text-(--color-dark) tracking-widest">
+                  Cost management
                 </h3>
               </div>
 
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 {[
                   {
-                    label: "Packaging Cost",
+                    label: "Packaging cost",
                     name: "packagingCost",
-                    icon: <Truck size={18} />,
                   },
                   {
-                    label: "Marketing Cost",
+                    label: "Marketing cost",
                     name: "marketingCosts",
-                    icon: <Zap size={18} />,
                   },
                 ].map((input) => (
-                  <div
-                    key={input.name}
-                    className="space-y-1.5 focus-within:z-10"
-                  >
-                    <label className="text-xs font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                  <div key={input.name} className="space-y-1.5">
+                    <label className="text-[10px] font-bold text-(--color-pakistan) uppercase tracking-widest">
                       {input.label}
                     </label>
                     <div className="relative group">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-(--color-tiger)">
-                        {input.icon}
-                      </div>
                       <input
                         type="number"
                         name={input.name}
@@ -352,11 +311,11 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                         }
                         onChange={handleChange}
                         placeholder={input.label}
-                        className="w-full pl-12 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) placeholder:text-gray-300 shadow-sm"
+                        className="w-full px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm"
                       />
                     </div>
                     {errors[input.name as keyof ErrorProductType] && (
-                      <p className="text-red-500 text-[10px] font-bold ml-1">
+                      <p className="text-red-500 text-[10px] font-medium mt-1">
                         {errors[input.name as keyof ErrorProductType] as string}
                       </p>
                     )}
@@ -366,32 +325,26 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
             </section>
 
             {/* Visual Assets */}
-            <section className="space-y-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-(--color-tiger)/10 rounded-xl text-(--color-tiger)">
-                  <Palette size={20} />
-                </div>
-                <h3 className="text-xl font-black text-(--color-pakistan) tracking-tight">
-                  Visual Assets
+            <section className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <h3 className="text-lg font-bold text-(--color-dark) tracking-widest">
+                  Visual assets
                 </h3>
               </div>
 
-              <div className="p-4 bg-white/40 border border-white/60 rounded-4xl shadow-sm space-y-4">
+              <div className="p-6 bg-white border border-(--color-border) rounded-none space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
-                    <h4 className="text-sm font-black text-(--color-pakistan) uppercase tracking-wider">
-                      Product Gallery
+                    <h4 className="text-xs font-bold text-(--color-dark) tracking-widest">
+                      Product gallery
                     </h4>
-                    <p className="text-[10px] font-medium text-(--color-pakistan)/40 italic">
+                    <p className="text-[10px] font-medium text-(--color-pakistan) italic">
                       High-resolution images enhance customer confidence.
                     </p>
                   </div>
-                  <label className="inline-flex items-center gap-2 bg-(--color-tiger) text-white px-5 py-2.5 rounded-xl cursor-pointer hover:bg-(--color-earth) transition-all shadow-lg shadow-(--color-tiger)/20 font-black text-[10px] uppercase tracking-widest group">
-                    <PlusCircle
-                      size={14}
-                      className="group-hover:rotate-90 transition-transform"
-                    />
-                    Upload Photos
+                  <label className="inline-flex items-center gap-2 bg-(--color-dark) text-white px-6 py-3 rounded-none cursor-pointer hover:bg-black transition-all font-bold text-[10px] tracking-widest group">
+                    <PlusCircle size={14} />
+                    Upload photos
                     <input
                       type="file"
                       accept="image/*"
@@ -417,7 +370,7 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
-                        className="relative group aspect-square border border-white/60 rounded-2xl overflow-hidden shadow-sm bg-white"
+                        className="relative group aspect-square border border-(--color-border) rounded-none overflow-hidden bg-white"
                       >
                         <img
                           src={src}
@@ -439,13 +392,10 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
             </section>
 
             {/* Dimensional Scaling */}
-            <section className="space-y-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="p-2 bg-(--color-tiger)/10 rounded-xl text-(--color-tiger)">
-                  <Ruler size={20} />
-                </div>
-                <h3 className="text-xl font-black text-(--color-pakistan) tracking-tight">
-                  Size Variations
+            <section className="space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <h3 className="text-lg font-bold text-(--color-dark) tracking-widest">
+                  Inventory variations
                 </h3>
               </div>
 
@@ -457,11 +407,11 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
-                      className="grid grid-cols-2 md:grid-cols-5 gap-3 p-2 bg-white/30 border border-white/40 rounded-2xl items-end relative group "
+                      className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 bg-white border border-(--color-border) rounded-none items-end relative group"
                     >
                       {["size", "length", "width", "stock"].map((field) => (
                         <div key={field} className="space-y-1.5">
-                          <label className="text-[10px] font-black text-(--color-pakistan)/70 uppercase tracking-widest ml-1">
+                          <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
                             {field}
                           </label>
                           <input
@@ -477,10 +427,10 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                               handleSizeChange(
                                 index,
                                 field as keyof SizeErrorType,
-                                e.target.value
+                                e.target.value,
                               )
                             }
-                            className="w-full px-3 py-2 bg-white/60 border border-white/40 rounded-xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-sm text-(--color-pakistan) shadow-sm"
+                            className="w-full px-3 py-2 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-xs text-(--color-dark)"
                           />
                           {errors?.sizes?.[index]?.[
                             field as keyof SizeErrorType
@@ -511,53 +461,48 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
                 <button
                   type="button"
                   onClick={addSizeField}
-                  className="flex items-center gap-2 text-xs font-black text-(--color-tiger) uppercase tracking-widest hover:text-(--color-earth) transition-colors ml-1"
+                  className="flex items-center gap-2 text-[10px] font-bold text-(--color-dark) tracking-widest hover:underline transition-all"
                 >
                   <PlusCircle size={14} />
-                  Add New Size Specification
+                  Add specification
                 </button>
               </div>
             </section>
 
             {/* Submit Action Block */}
-            <motion.div variants={itemVariants} className="pt-4">
+            <motion.div variants={itemVariants} className="pt-8">
               <motion.button
                 whileHover={
                   !(isLoadingPost || isLoadingPatch)
                     ? {
-                        scale: 1.01,
-                        boxShadow: "0 20px 40px -15px rgba(0,0,0,0.1)",
+                        opacity: 0.9,
                       }
                     : {}
                 }
                 whileTap={
-                  !(isLoadingPost || isLoadingPatch) ? { scale: 0.98 } : {}
+                  !(isLoadingPost || isLoadingPatch) ? { scale: 0.99 } : {}
                 }
                 disabled={isLoadingPost || isLoadingPatch}
                 type="submit"
-                className={`w-full flex items-center justify-center gap-3 text-white font-black uppercase tracking-[0.2em] text-xs py-5 rounded-2xl shadow-xl transition-all relative overflow-hidden group
+                className={`w-full flex items-center justify-center gap-3 text-white font-bold tracking-[0.2em] text-[10px] py-5 rounded-none shadow-sm transition-all relative overflow-hidden group
                  ${
                    isLoadingPost || isLoadingPatch
-                     ? "bg-(--color-earth) cursor-not-allowed"
-                     : "bg-linear-to-r from-(--color-tiger) to-(--color-earth) hover:opacity-90 cursor-pointer"
+                     ? "bg-(--color-pakistan) cursor-not-allowed"
+                     : "bg-(--color-dark) cursor-pointer"
                  }`}
               >
-                <div className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-
                 {isLoadingPost || isLoadingPatch ? (
                   <Loader2 className="w-5 h-5 animate-spin" />
                 ) : (
                   <>
-                    <Save size={18} />
-                    {mode === "add"
-                      ? "Finalize & Save Product"
-                      : "Confirm Data Updates"}
+                    <Save size={16} />
+                    {mode === "add" ? "Create product entry" : "Save changes"}
                   </>
                 )}
               </motion.button>
 
-              <p className="text-center mt-6 text-[10px] font-bold text-(--color-pakistan)/30 uppercase tracking-[0.3em]">
-                Authentic Administrative Operation
+              <p className="text-center mt-8 text-[9px] font-bold text-(--color-pakistan) tracking-[0.3em]">
+                Secure inventory operation
               </p>
             </motion.div>
           </form>
@@ -568,7 +513,7 @@ export default function ProductForm({ mode }: { mode: "add" | "edit" }) {
 }
 
 /**
- * ProductDropdown: Custom dropdown for category and color selection.
+ * ProductDropdown: Custom searchable dropdown for category and color selection.
  */
 const ProductDropdown = ({
   value,
@@ -576,33 +521,47 @@ const ProductDropdown = ({
   items,
   isLoading,
   isError,
-  icon,
   onChange,
+  showSwatches = false,
 }: {
   value: string;
   label: string;
-  items: { id: string; name: string }[];
+  items: { id: string; name: string; color?: string }[];
   isLoading: boolean;
   isError: boolean;
-  icon: React.ReactNode;
   onChange: (id: string, name: string) => void;
+  showSwatches?: boolean;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  const selectedItem = items.find((item) => item.id === value);
 
   return (
     <div className="relative">
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between pl-4 pr-4 py-2.5 sm:py-3.5 bg-white/60 border border-white/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-(--color-tiger)/20 focus:bg-white transition-all font-bold text-(--color-pakistan) shadow-sm cursor-pointer"
+        className="w-full flex items-center justify-between px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) text-sm shadow-sm cursor-pointer"
       >
-        <div className="flex items-center gap-3">
-          <div className="text-(--color-tiger)">{icon}</div>
-          <span className="truncate max-w-[120px] sm:max-w-none">{label}</span>
+        <div className="flex items-center gap-2 truncate">
+          {showSwatches && selectedItem?.color && (
+            <div
+              className="w-3 h-3 rounded-full border border-gray-200 shrink-0"
+              style={{ backgroundColor: selectedItem.color }}
+            />
+          )}
+          <span className="truncate max-w-[120px] sm:max-w-none">
+            {selectedItem?.name || label}
+          </span>
         </div>
         <ChevronDown
-          size={18}
-          className={`text-(--color-tiger) transition-transform ${
+          size={16}
+          className={`text-(--color-dark) transition-transform ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -616,47 +575,73 @@ const ProductDropdown = ({
               onClick={() => setIsOpen(false)}
             />
             <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 10, scale: 0.95 }}
-              className="absolute top-full left-0 right-0 mt-2 z-50 bg-white/80 backdrop-blur-2xl border border-white/60 rounded-3xl shadow-2xl p-2 overflow-hidden"
+              initial={{ opacity: 0, scale: 0.98, y: -4 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98, y: -4 }}
+              className="absolute top-full left-0 right-0 mt-1 z-50 bg-white border border-(--color-border) rounded-none shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden"
             >
+              <div className="p-2 border-b border-gray-100">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-3 py-2 text-[10px] font-bold uppercase tracking-widest bg-gray-50 border-none focus:ring-0 placeholder:text-gray-300"
+                  autoFocus
+                />
+              </div>
+
               {isLoading ? (
-                <div className="p-4 text-center text-(--color-pakistan)/40 text-xs font-black uppercase">
-                  Fetching data...
+                <div className="p-4 text-center text-(--color-pakistan) text-[10px] font-bold uppercase">
+                  Loading...
                 </div>
               ) : isError ? (
-                <div className="p-4 text-center text-red-500 text-xs font-black uppercase">
-                  Retrieval Error
+                <div className="p-4 text-center text-red-500 text-[10px] font-bold uppercase">
+                  Error
                 </div>
               ) : (
-                <div className="max-h-60 overflow-y-auto custom-scrollbar p-1 space-y-1">
-                  {items.map((item) => (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => {
-                        onChange(item.id, item.name);
-                        setIsOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between p-3 rounded-xl transition-all text-left group ${
-                        value === item.id
-                          ? "bg-(--color-tiger) text-white shadow-md shadow-(--color-tiger)/20"
-                          : "hover:bg-white text-(--color-pakistan)/80"
-                      }`}
-                    >
-                      <span className="font-black text-sm">{item.name}</span>
-                      {value === item.id && (
-                        <motion.div
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 }}
-                          className="bg-white/20 p-1 rounded-full text-white"
-                        >
-                          <Check size={14} strokeWidth={4} />
-                        </motion.div>
-                      )}
-                    </button>
-                  ))}
+                <div className="max-h-60 overflow-y-auto scrollbar-hide p-1">
+                  {filteredItems.length === 0 ? (
+                    <div className="p-4 text-center text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+                      No results found
+                    </div>
+                  ) : (
+                    filteredItems.map((item) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => {
+                          onChange(item.id, item.name);
+                          setIsOpen(false);
+                          setSearchQuery("");
+                        }}
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-none transition-all text-left group ${
+                          value === item.id
+                            ? "bg-(--color-dark) text-white"
+                            : "hover:bg-gray-50 text-(--color-dark)"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          {showSwatches && item.color && (
+                            <div
+                              className={`w-4 h-4 rounded-full border ${
+                                value === item.id
+                                  ? "border-white/30"
+                                  : "border-gray-200"
+                              }`}
+                              style={{ backgroundColor: item.color }}
+                            />
+                          )}
+                          <span className="font-bold text-[11px] uppercase tracking-wide">
+                            {item.name}
+                          </span>
+                        </div>
+                        {value === item.id && (
+                          <Check size={12} strokeWidth={3} />
+                        )}
+                      </button>
+                    ))
+                  )}
                 </div>
               )}
             </motion.div>

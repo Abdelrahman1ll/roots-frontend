@@ -95,7 +95,9 @@ export default function useCheckout() {
     }
   }, [user]);
 
-  const { data, isLoading } = useGetCartQuery(undefined);
+  const { data, isLoading } = useGetCartQuery(undefined, {
+    skip: user?.role !== "user",
+  });
   const { data: delivery } = useGetDeliveryQuery(undefined);
   const [validateDiscountCode] = usePostValidateDiscountCodeMutation();
   const [postOrders, { isLoading: orderLoading }] = usePostOrdersMutation();

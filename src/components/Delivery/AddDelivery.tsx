@@ -6,7 +6,7 @@ import {
   usePostFreeDeliveryMutation,
 } from "../../redux/Delivery/apiDelivery";
 import { toast } from "react-toastify";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, PackageSearch } from "lucide-react";
 
 interface DeliveryType {
   id: number;
@@ -65,56 +65,53 @@ export default function DeliveryPrice() {
   };
 
   return (
-    <div className="relative min-h-screen py-20 px-4 overflow-hidden">
-      {/* Dynamic Radial Background */}
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_50%_0%,rgba(188,108,37,0.1)_0%,transparent_50%),radial-gradient(circle_at_100%_100%,rgba(96,108,56,0.05)_0%,transparent_50%)]" />
-
+    <div className="min-h-screen bg-(--color-cornsilk) flex flex-col items-center py-12 px-4 md:px-6">
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full max-w-xl mx-auto"
+        className="w-full max-w-xl"
       >
         {/* Header Section */}
-        <div className="mb-10 text-center">
+        <div className="text-left mb-12 border-b border-(--color-border) pb-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-white/60 text-(--color-tiger) font-black text-xs uppercase tracking-widest mb-4"
+            className="inline-flex items-center gap-3 mb-4"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-(--color-tiger) opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-(--color-tiger)"></span>
+            <PackageSearch size={20} className="text-(--color-dark)" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-(--color-pakistan)">
+              Administrative Panel
             </span>
-            Logistics Control
           </motion.div>
-          <h1 className="text-4xl font-black text-(--color-pakistan) tracking-tight mb-2">
-            Delivery Pricing
+          <h1 className="text-3xl md:text-4xl font-bold text-(--color-dark) tracking-tight mb-4">
+            Delivery pricing
           </h1>
-          <p className="text-(--color-pakistan)/60 font-medium font-['Outfit']">
-            Configure tiered shipping rates and global promotions
+          <p className="text-(--color-pakistan) font-medium max-w-lg leading-relaxed text-sm">
+            Configure tiered shipping rates and global promotions for your
+            customers.
           </p>
         </div>
 
         {/* Main Interface Card */}
-        <div className="relative rounded-[2.5rem] overflow-hidden border border-white/60 bg-white/40 backdrop-blur-xl shadow-2xl p-8 sm:p-10">
+        <div className="bg-white border border-(--color-border) p-6 md:p-10 rounded-none shadow-sm mb-12">
           {/* Current Status Display */}
           <div className="grid grid-cols-2 gap-4 mb-10">
-            <div className="bg-white/30 backdrop-blur-md border border-white/60 rounded-3xl p-6 text-center group hover:bg-white/50 transition-all duration-300">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-(--color-pakistan)/40 mb-2">
-                Near Areas
+            <div className="bg-white border border-(--color-border) p-6 text-center group hover:border-(--color-dark) transition-all">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-(--color-pakistan) mb-2">
+                Near areas
               </p>
-              <p className="text-3xl font-black text-(--color-pakistan)">
+              <p className="text-3xl font-bold text-(--color-dark)">
                 {delivery?.deliveryPriceClose || 0}
                 <span className="text-xs ml-1 opacity-50 font-medium">EGP</span>
               </p>
             </div>
 
-            <div className="bg-white/30 backdrop-blur-md border border-white/60 rounded-3xl p-6 text-center group hover:bg-white/50 transition-all duration-300">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-(--color-pakistan)/40 mb-2">
-                Far Areas
+            <div className="bg-white border border-(--color-border) p-6 text-center group hover:border-(--color-dark) transition-all">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-(--color-pakistan) mb-2">
+                Far areas
               </p>
-              <p className="text-3xl font-black text-(--color-pakistan)">
+              <p className="text-3xl font-bold text-(--color-dark)">
                 {delivery?.deliveryPriceFar || 0}
                 <span className="text-xs ml-1 opacity-50 font-medium">EGP</span>
               </p>
@@ -122,101 +119,109 @@ export default function DeliveryPrice() {
           </div>
 
           {/* Pricing Inputs */}
-          <div className="space-y-4 mb-8">
-            <div className="relative group">
-              <input
-                type="number"
-                value={priceClose}
-                onChange={(e) => setPriceClose(e.target.value)}
-                placeholder="Near Region Rate"
-                className="w-full bg-white/50 border border-white/60 rounded-2xl px-6 py-4 font-bold text-(--color-pakistan) placeholder:text-(--color-pakistan)/30 focus:bg-white/80 focus:border-(--color-tiger) focus:ring-4 focus:ring-(--color-tiger)/5 outline-none transition-all"
-              />
+          <div className="space-y-6 mb-8">
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
+                Near region rate
+              </label>
+              <div className="relative group">
+                <input
+                  type="number"
+                  value={priceClose}
+                  onChange={(e) => setPriceClose(e.target.value)}
+                  placeholder="Ex: 50"
+                  className="w-full px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm"
+                />
+              </div>
             </div>
 
-            <div className="relative group">
-              <input
-                type="number"
-                value={priceFar}
-                onChange={(e) => setPriceFar(e.target.value)}
-                placeholder="Far Region Rate"
-                className="w-full bg-white/50 border border-white/60 rounded-2xl px-6 py-4 font-bold text-(--color-pakistan) placeholder:text-(--color-pakistan)/30 focus:bg-white/80 focus:border-(--color-tiger) focus:ring-4 focus:ring-(--color-tiger)/5 outline-none transition-all"
-              />
+            <div className="space-y-1.5">
+              <label className="text-[10px] font-bold text-(--color-pakistan) tracking-widest">
+                Far region rate
+              </label>
+              <div className="relative group">
+                <input
+                  type="number"
+                  value={priceFar}
+                  onChange={(e) => setPriceFar(e.target.value)}
+                  placeholder="Ex: 100"
+                  className="w-full px-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm"
+                />
+              </div>
             </div>
           </div>
 
           {/* Submit Action */}
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
             onClick={handleAddDelivery}
             disabled={isLoading}
-            className="w-full py-4 rounded-2xl bg-linear-to-r from-(--color-tiger) to-(--color-earth) text-white font-black uppercase tracking-widest text-xs shadow-xl shadow-(--color-tiger)/20 transition-all disabled:opacity-50"
+            className="w-full py-4 bg-(--color-dark) text-white font-bold tracking-widest text-[10px] uppercase shadow-sm transition-all disabled:opacity-50"
           >
-            {isLoading ? "Synchronizing..." : "Update Shipping Rates"}
+            {isLoading ? "Synchronizing..." : "Update shipping rates"}
           </motion.button>
 
           {/* Advanced Settings Logic */}
-          <div className="mt-10 pt-8 border-t border-white/40">
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+          <div className="mt-12 pt-10 border-t border-(--color-border)">
+            <button
               onClick={() => setOpenPanel(!openPanel)}
-              className="w-full py-4 rounded-2xl bg-white/40 backdrop-blur-md border border-white/60 text-(--color-pakistan) font-black text-xs uppercase tracking-[0.2em] shadow-lg transition-all flex items-center justify-center gap-3"
+              className="w-full py-4 border border-(--color-border) bg-white text-(--color-dark) font-bold text-[10px] uppercase tracking-[0.2em] shadow-sm transition-all flex items-center justify-center gap-3 hover:border-(--color-dark)"
             >
-              {openPanel ? "Minimize Settings" : "Advanced Configuration"}
+              {openPanel ? "Minimize settings" : "Advanced configuration"}
               <motion.span
                 animate={{ rotate: openPanel ? 180 : 0 }}
                 transition={{ duration: 0.4, ease: "circOut" }}
               >
-                <ChevronDown size={16} />
+                <ChevronDown size={14} />
               </motion.span>
-            </motion.button>
+            </button>
 
             <motion.div
               initial={false}
               animate={{
                 height: openPanel ? "auto" : 0,
                 opacity: openPanel ? 1 : 0,
-                marginTop: openPanel ? 16 : 0,
+                marginTop: openPanel ? 24 : 0,
               }}
               transition={{ duration: 0.5, ease: "circOut" }}
               className="overflow-hidden"
             >
-              <div className="p-6 rounded-3xl border border-white/60 bg-white/30 backdrop-blur-xl shadow-inner space-y-6">
+              <div className="p-8 border border-(--color-border) bg-white shadow-sm space-y-8">
                 <div className="text-center">
-                  <h3 className="text-lg font-black text-(--color-pakistan) tracking-tight mb-4">
-                    Global Free Delivery
+                  <h3 className="text-lg font-bold text-(--color-dark) tracking-tight mb-4">
+                    Global free delivery
                   </h3>
 
                   {delivery?.freeDelivery ? (
                     <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
+                      initial={{ scale: 0.98, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="inline-flex flex-col items-center gap-2 p-6 bg-[#606C38]/10 rounded-2xl border border-[#606C38]/20 w-full"
+                      className="inline-flex flex-col items-center gap-2 p-6 bg-(--color-pakistan)/5 border border-(--color-pakistan)/10 w-full"
                     >
-                      <div className="w-12 h-12 rounded-full bg-[#606C38] flex items-center justify-center text-white mb-2 shadow-lg shadow-[#606C38]/20">
+                      <div className="w-10 h-10 rounded-none bg-(--color-pakistan) flex items-center justify-center text-white mb-2 shadow-sm">
                         ✓
                       </div>
-                      <p className="text-[#606C38] font-black uppercase tracking-widest text-xs">
-                        Active Promotion
+                      <p className="text-(--color-pakistan) font-bold text-[10px] uppercase tracking-widest">
+                        Active promotion
                       </p>
-                      <p className="text-(--color-pakistan)/60 text-[10px] font-bold">
+                      <p className="text-(--color-pakistan) text-xs font-medium">
                         Zero-cost shipping is currently applied globally
                       </p>
                     </motion.div>
                   ) : (
                     <motion.div
-                      initial={{ scale: 0.9, opacity: 0 }}
+                      initial={{ scale: 0.98, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="inline-flex flex-col items-center gap-2 p-6 bg-(--color-tiger)/5 rounded-2xl border border-(--color-tiger)/10 w-full"
+                      className="inline-flex flex-col items-center gap-2 p-6 bg-gray-50 border border-gray-100 w-full"
                     >
-                      <div className="w-12 h-12 rounded-full bg-(--color-tiger)/20 flex items-center justify-center text-(--color-tiger) mb-2">
+                      <div className="w-10 h-10 rounded-none bg-gray-200 flex items-center justify-center text-gray-500 mb-2">
                         !
                       </div>
-                      <p className="text-(--color-tiger) font-black uppercase tracking-widest text-xs">
-                        Standard Billing
+                      <p className="text-gray-500 font-bold text-[10px] uppercase tracking-widest">
+                        Standard billing
                       </p>
-                      <p className="text-(--color-pakistan)/60 text-[10px] font-bold">
+                      <p className="text-gray-400 text-xs font-medium">
                         Calculated rates are active for all shipments
                       </p>
                     </motion.div>
@@ -224,17 +229,15 @@ export default function DeliveryPrice() {
                 </div>
 
                 <motion.button
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow: "0 10px 30px -10px rgba(96,108,56,0.5)",
-                  }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                   onClick={handleFreeDelivery}
-                  className="w-full py-4 rounded-2xl bg-linear-to-r from-(--color-earth) to-[#606C38] text-white font-black uppercase tracking-widest text-xs shadow-xl transition-all"
+                  className={`w-full py-4 text-white font-bold text-[10px] uppercase tracking-widest shadow-sm transition-all
+                    ${delivery?.freeDelivery ? "bg-red-500 hover:bg-red-600" : "bg-(--color-pakistan) hover:bg-(--color-dark)"}`}
                 >
                   {delivery?.freeDelivery
-                    ? "Deactivate Free Delivery"
-                    : "Override to Free Shipping"}
+                    ? "Deactivate free delivery"
+                    : "Override to free shipping"}
                 </motion.button>
               </div>
             </motion.div>

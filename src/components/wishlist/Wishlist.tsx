@@ -5,7 +5,7 @@ import type { ProductType } from "../../types/ProductType";
 import { Link } from "react-router-dom";
 import UseWishlist from "./useWishlist";
 import React, { useContext } from "react";
-import { usePostCartMutation, useGetCartQuery } from "../../redux/Cart/apiCart";
+import { usePostCartMutation } from "../../redux/Cart/apiCart";
 import { SignupContext } from "../../context/SignupContext";
 import { toast } from "react-toastify";
 import type { ProductSizeType } from "../../types/ProductType";
@@ -68,7 +68,6 @@ export default function Wishlist() {
   );
 
   const [postCart, { isLoading: isAdding }] = usePostCartMutation();
-  const { refetch: refetchCart } = useGetCartQuery({});
   const { openSignup } = useContext(SignupContext);
 
   const handleQuickAdd = async (e: React.MouseEvent, product: ProductType) => {
@@ -101,7 +100,6 @@ export default function Wishlist() {
         quantity: 1,
         sizes: availableSize.id,
       }).unwrap();
-      refetchCart();
       toast.success(`${product.name} added to cart`);
     } catch (error: unknown) {
       const err = error as { data?: { message?: string } };

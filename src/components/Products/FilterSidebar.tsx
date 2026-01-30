@@ -226,8 +226,8 @@ export default function FilterSidebar() {
   return (
     <div className="m-4 mb-8">
       {/* Action Bar: Filters | Search | Sort */}
-      <div className="w-full mx-auto px-4 max-w-7xl">
-        <div className="flex flex-row items-center justify-between gap-6 mb-12">
+      <div className="w-full mx-auto px-4">
+        <div className="flex flex-row items-center justify-between mb-12">
           {/* Left: Filter Drawer Trigger */}
           <div className="w-40 md:w-64">
             <motion.button
