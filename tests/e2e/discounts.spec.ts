@@ -24,7 +24,7 @@ test.describe("Discount Codes (e2e)", () => {
 
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 5);
-    const startDateInput = page.getByPlaceholder(/Start Date/i);
+    const startDateInput = page.getByPlaceholder(/Ex: 2026-01-31/i);
     await startDateInput.fill(tomorrow.toISOString().split("T")[0]);
 
     await page.getByRole("button", { name: /Add Code/i }).click();
@@ -40,7 +40,7 @@ test.describe("Discount Codes (e2e)", () => {
       .getByLabel("Edit")
       .click();
     await page.getByPlaceholder(/Ex: SUMMER2026/i).fill(editBaseCode);
-    await page.getByRole("button", { name: /Edit Code/i }).click();
+    await page.getByRole("button", { name: /Update Code/i }).click();
     await expect(page.getByText(editBaseCode).first()).toBeVisible();
 
     // 3. Delete

@@ -84,7 +84,7 @@ export default function OrderDetails() {
           animate={{ opacity: 1 }}
           className="text-4xl font-black tracking-tighter uppercase text-black"
         >
-          Archive Registry
+          Order Details
         </motion.h2>
       </div>
 

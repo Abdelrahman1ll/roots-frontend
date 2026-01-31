@@ -15,11 +15,11 @@ test.describe("Delivery", () => {
     await page.waitForLoadState("networkidle");
 
     // Wait for the inputs to be ready to avoid flakiness
-    const nearInput = page.getByPlaceholder(/Near Region Rate/i).first();
+    const nearInput = page.getByPlaceholder(/Ex: 50/i).first();
     await nearInput.waitFor({ state: "visible" });
     await nearInput.fill(NEAR_PRICE);
 
-    const farInput = page.getByPlaceholder(/Far Region Rate/i).first();
+    const farInput = page.getByPlaceholder(/Ex: 100/i).first();
     await farInput.waitFor({ state: "visible" });
     await farInput.fill(FAR_PRICE);
 

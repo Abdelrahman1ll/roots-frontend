@@ -197,7 +197,7 @@ export default function Signup({ onClose }: { onClose: () => void }) {
                           onChange={(e) => handleChange(e, i)}
                           onKeyDown={(e) => handleKeyDown(e, i)}
                           onPaste={handlePaste}
-                          className="w-12 h-16 text-center text-2xl font-light border-b border-gray-100 focus:border-(--color-dark) outline-none transition-all bg-white text-(--color-dark)"
+                          className="w-12 h-16 text-center text-2xl font-light border-b border-gray-100 focus:border-(--color-dark) outline-none transition-all bg-gray-50/80 text-(--color-dark)"
                         />
                       ))}
                     </div>

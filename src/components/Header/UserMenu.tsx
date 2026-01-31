@@ -106,6 +106,8 @@ export default function UserMenu({
         onClick={() => setOpenMenu(!openMenu)}
         ref={avatarRef}
         whileTap={{ scale: 0.95 }}
+        title={"حسابي"}
+        aria-label="User Menu"
       >
         <span className="text-sm font-bold uppercase tracking-tighter">
           {user?.email?.charAt(0) || "U"}

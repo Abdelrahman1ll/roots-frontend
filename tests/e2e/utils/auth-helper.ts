@@ -10,7 +10,7 @@ export async function login(page: Page, email: string) {
 
   await page
     .getByRole("button", {
-      name: /Send Verification Code/i,
+      name: /Dispatch Code/i,
     })
     .click();
 
@@ -21,11 +21,11 @@ export async function login(page: Page, email: string) {
     await page.locator(`#code-${i}`).fill(otp[i]);
   }
 
-  await page.getByRole("button", { name: /Verify & Sign Up/i }).click();
+  await page.getByRole("button", { name: /Sync Archive/i }).click();
 
   // Wait for the modal/button to disappear to confirm login success
   await expect(
-    page.getByRole("button", { name: /Verify & Sign Up/i }),
+    page.getByRole("button", { name: /Sync Archive/i }),
   ).not.toBeVisible({ timeout: 15000 });
 
   console.log("[AuthHelper] login successful.");
@@ -40,7 +40,7 @@ export async function logout(page: Page) {
   // 1. Ensure page is stable before clicking
   await page.waitForLoadState("networkidle");
   // 1. Open User Menu - Use force:true to bypass stability checks during animations
-  await page.locator(".lucide-user").first().click({ force: true });
+  await page.getByLabel("User Menu").first().click({ force: true });
 
   // 2. Click logout button - MUST await and click to actually trigger logout
   await page

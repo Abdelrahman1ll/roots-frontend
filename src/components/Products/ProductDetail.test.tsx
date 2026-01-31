@@ -21,7 +21,7 @@ vi.mock("./ImageZoom", () => ({
 
 vi.mock("./AddToCartButton", () => ({
   default: ({ addToCart }: { addToCart: () => void }) => (
-    <button onClick={addToCart}>Add To Cart</button>
+    <button onClick={addToCart}>Add to Bag</button>
   ),
 }));
 
@@ -253,7 +253,7 @@ describe("ProductDetail Component", () => {
       </BrowserRouter>,
     );
 
-    const addBtn = screen.getByText(/Add To Cart/i);
+    const addBtn = screen.getByText(/Add to Bag/i);
     fireEvent.click(addBtn);
     expect(addToCart).toHaveBeenCalled();
   });

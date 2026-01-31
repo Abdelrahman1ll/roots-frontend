@@ -140,7 +140,7 @@ export default function Checkout() {
                   <Truck size={20} />
                 </div>
                 <h2 className="text-xl font-black text-black uppercase tracking-tighter">
-                  Dispatch Protocol
+                  Shipping Address
                 </h2>
                 {/* 
                    Shipping Details Section: Collects user address and contact info.
@@ -393,7 +393,7 @@ export default function Checkout() {
                     <div className="absolute left-1 top-1 w-4 h-4 bg-white transition-transform peer-checked:translate-x-4"></div>
                   </div>
                   <span className="text-[10px] font-black uppercase tracking-widest text-black group-hover:opacity-60 transition-opacity">
-                    Save Address Protocol
+                    Save Address for Later
                   </span>
                 </label>
               </div>
@@ -578,7 +578,7 @@ export default function Checkout() {
                   <ShoppingCart size={20} />
                 </div>
                 <h2 className="text-xl font-black text-black uppercase tracking-tighter">
-                  Archive Summary
+                  Order Summary
                 </h2>
                 {/* 
                    Order Summary Section: Displays cart items, delivery fees, and final total.
@@ -693,7 +693,7 @@ export default function Checkout() {
                         className="text-green-600 text-[10px] font-black uppercase tracking-widest flex items-center gap-3 ml-1 mt-2"
                       >
                         <span className="flex h-2 w-2 bg-green-500 animate-ping" />
-                        Access Granted: {discount}% Reduction
+                        Discount Applied: {discount}% OFF
                       </motion.p>
                     )}
                   </AnimatePresence>
@@ -751,7 +751,7 @@ export default function Checkout() {
                   <div className="pt-8 border-t-2 border-black flex justify-between items-end text-black">
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-30 block mb-2">
-                        Final Aggregate
+                        Total Amount
                       </span>
                       <span className="text-4xl font-black tracking-tighter">
                         {(finalTotal || 0).toLocaleString()} EGP
@@ -789,7 +789,7 @@ export default function Checkout() {
                       {orderLoading ? (
                         <Loader2 className="animate-spin w-4 h-4" />
                       ) : (
-                        "Confirm Order Protocol"
+                        "Complete Order"
                       )}
                     </button>
                   )}

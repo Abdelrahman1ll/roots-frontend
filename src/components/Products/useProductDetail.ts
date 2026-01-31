@@ -69,16 +69,16 @@ export default function useProductDetail() {
     id: null,
   });
 
-  const addToCart = async () => {
+  const addToCart = async (): Promise<boolean> => {
     // التحقق من تسجيل الدخول
     if (!user) {
       openSignup();
-      return;
+      return false;
     }
 
     if (user.role !== "user") {
       toast.error("I'm not allowed to admin");
-      return;
+      return false;
     }
     const newErrors: {
       selectedSize: string | null;
@@ -98,7 +98,7 @@ export default function useProductDetail() {
     // لو في أي Error وقف
     if (newErrors.selectedSize || newErrors.quantity || newErrors.id) {
       setErrors(newErrors);
-      return;
+      return false;
     }
     try {
       await postCart({
@@ -106,9 +106,11 @@ export default function useProductDetail() {
         quantity: quantity,
         sizes: selectedSize,
       }).unwrap();
+      return true;
     } catch (error: unknown) {
       const err = error as { data?: { message?: string } };
       toast.error(err?.data?.message || "Failed to add item to cart");
+      return false;
     }
   };
 

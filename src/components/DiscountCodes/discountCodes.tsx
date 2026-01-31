@@ -60,7 +60,7 @@ export default function DiscountCodes() {
           className="bg-white border border-(--color-border) p-6 md:p-10 rounded-none shadow-sm mb-12"
         >
           <h2 className="text-xl font-bold text-(--color-dark) mb-8">
-            {editingId ? "Edit promotion" : "New promotion"}
+            {editingId ? "Edit" : "New"}
           </h2>
 
           <div className="grid sm:grid-cols-3 gap-6 mb-8">
@@ -109,6 +109,7 @@ export default function DiscountCodes() {
               <div className="relative group">
                 <input
                   type="date"
+                  placeholder="Ex: 2026-01-31"
                   value={newExpiry}
                   onChange={(e) => setNewExpiry(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 bg-white border border-(--color-border) rounded-none focus:outline-none focus:border-(--color-dark) transition-all font-medium text-(--color-dark) placeholder:text-gray-300 text-sm"
@@ -133,7 +134,7 @@ export default function DiscountCodes() {
             ) : (
               <>
                 {editingId ? <Edit size={14} /> : <Ticket size={14} />}
-                {editingId ? "Update promotion" : "Create promotion"}
+                {editingId ? "Update Code" : "Add Code"}
               </>
             )}
           </motion.button>
@@ -191,6 +192,7 @@ export default function DiscountCodes() {
                         onClick={() => handleEdit(item)}
                         className="text-(--color-pakistan) hover:text-(--color-dark) transition-colors"
                         title="Edit"
+                        aria-label="Edit"
                       >
                         <Edit size={16} />
                       </button>
@@ -198,6 +200,7 @@ export default function DiscountCodes() {
                         onClick={() => handleDelete(item.id)}
                         className="text-gray-200 hover:text-red-500 transition-colors"
                         title="Delete"
+                        aria-label="Delete"
                       >
                         <Trash2 size={16} />
                       </button>

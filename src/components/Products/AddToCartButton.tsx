@@ -10,16 +10,18 @@ import "./AddToCartButton.css";
 export default function AddToCartButton({
   addToCart,
 }: {
-  addToCart: () => void;
+  addToCart: () => Promise<boolean>;
 }) {
   const { openCart } = useUI();
   const [clicked, setClicked] = useState(false);
 
-  const handleClick = () => {
-    setClicked(true);
-    addToCart();
-    openCart();
-    setTimeout(() => setClicked(false), 2000);
+  const handleClick = async () => {
+    const success = await addToCart();
+    if (success) {
+      setClicked(true);
+      openCart();
+      setTimeout(() => setClicked(false), 2000);
+    }
   };
 
   return (

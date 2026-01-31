@@ -129,59 +129,85 @@ test.describe("Cart (e2e)", () => {
     await expect(userCard).toBeVisible({ timeout: 15000 });
 
     // Click on the detail link (it's the top part of the card)
-    await userCard.locator('a[href*="products-details"]').click();
+    await userCard.locator('a[href*="products-details"]').first().click();
 
     // On Details Page
     await expect(page).toHaveURL(/.*products-details/);
+    const url = page.url();
+    const id = url.split("/").pop();
 
     // Select Size
     await page.getByRole("button", { name: "L", exact: true }).click();
 
     // Add to Cart
     await page
-      .getByRole("button", { name: /Add to Cart/i })
+      .getByRole("button", { name: /Add to Bag/i })
       .first()
       .click();
 
-    // Navigate to Cart
-    await page.goto("/cart");
+    // Wait for the button state to change to "Added to Archives" indicating success
+    // Success state confirms openCart() was called which opens the drawer
+    await expect(page.getByText(/Added to Archives/i)).toBeVisible({
+      timeout: 15000,
+    });
 
-    // Verify product presence
-    const cartItem = page
-      .locator("div.flex-col.md\\:flex-row.items-center")
-      .filter({ hasText: productName })
+    // Verify product presence in drawer - scoping to the drawer container
+    const drawer = page
+      .locator("div")
+      .filter({ has: page.getByText(/Archive Bag/i) });
+    const cartItem = drawer
+      .locator("div.group") // Individual item rows in CartDrawer have the 'group' class
+      .filter({ has: page.getByText(productName, { exact: false }) })
+      .filter({ hasText: /Size:/i })
       .first();
-    await expect(cartItem).toBeVisible({ timeout: 20000 });
+    await expect(cartItem).toBeVisible({ timeout: 10000 });
 
-    // Increase quantity
-    await cartItem.getByRole("button", { name: /\+/i }).click();
-    // Wait for internal state update/re-render
+    // Increase quantity in drawer
+    await cartItem.getByRole("button", { name: "+" }).click();
+    // Wait for internal state update (quantity 2)
     await expect(cartItem.getByText("2", { exact: true })).toBeVisible({
       timeout: 10000,
     });
 
-    // Decrease quantity (using the specific − character from the component)
-    await cartItem.getByRole("button", { name: /−/i }).click();
+    // Decrease quantity in drawer (using the specific − character)
+    await cartItem.getByRole("button", { name: "−" }).click();
     await expect(cartItem.getByText("1", { exact: true })).toBeVisible({
       timeout: 10000,
     });
 
-    // Navigate to Checkout
-    await page.getByRole("button", { name: /Checkout/i }).click();
+    // Navigate to Checkout from drawer
+    await drawer.getByRole("button", { name: /Initiate Checkout/i }).click();
 
     // Verify on Checkout Page
     await expect(page).toHaveURL(/.*checkout/);
 
-    await page.goto("/cart");
+    // Go back to product and open cart again to test removal
+    await page.goto(`/products-details/${id}`);
     await page.waitForLoadState("networkidle");
 
-    await cartItem.getByRole("button", { name: /Remove item/i }).click();
+    // Open cart via header icon
+    await page
+      .getByLabel(/View Shopping Cart/i)
+      .first()
+      .click();
+    await expect(page.getByText(/Archive Bag/i)).toBeVisible();
 
-    // Wait for the item to actually disappear from the DOM/visibility
-    await expect(cartItem).not.toBeVisible({ timeout: 500 });
+    const cartItemForRemoval = drawer
+      .locator("div.group")
+      .filter({ has: page.getByText(productName, { exact: false }) })
+      .filter({ hasText: /Size:/i })
+      .first();
 
-    // Verify item is removed - check for the empty state heading
-    await expect(page.getByText(/Your cart is empty/i)).toBeVisible({
+    // Remove item in drawer (using Trash2 icon button)
+    // The component uses <Trash2 size={14} />. Locating by role/svg or parent button.
+    await cartItemForRemoval
+      .locator("button")
+      .filter({ has: page.locator('svg[class*="lucide-trash"]') })
+      .first()
+      .click();
+
+    // Wait for the empty state in drawer
+    await expect(drawer.getByText(/Bag is empty/i)).toBeVisible({
       timeout: 15000,
     });
 
