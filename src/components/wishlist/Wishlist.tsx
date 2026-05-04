@@ -122,8 +122,8 @@ export default function Wishlist() {
             data?.wishlist.map(
               (wishl: { product: ProductType }, index: number) => {
                 const product = wishl.product;
-                const isHovered = hoveredIds[product.id] || false;
-                const isOutOfStock = product.stock === 0;
+                const isHovered = hoveredIds[product?.id] || false;
+                const isOutOfStock = product?.stock === 0;
 
                 return (
                   <motion.div
@@ -131,10 +131,10 @@ export default function Wishlist() {
                     variants={itemVariants}
                     className="group/card relative flex flex-col bg-white"
                     onMouseEnter={() =>
-                      setHoveredIds((prev) => ({ ...prev, [product.id]: true }))
+                      product?.id && setHoveredIds((prev) => ({ ...prev, [product.id]: true }))
                     }
                     onMouseLeave={() =>
-                      setHoveredIds((prev) => ({
+                      product?.id && setHoveredIds((prev) => ({
                         ...prev,
                         [product.id]: false,
                       }))
@@ -143,19 +143,17 @@ export default function Wishlist() {
                     {/* Main Image Container */}
                     <div className="relative aspect-3/4 w-full overflow-hidden bg-white">
                       <Link
-                        to={`/products-details/${product.id}`}
+                        to={`/products-details/${product?.id || ""}`}
                         className="block h-full w-full"
                       >
                         <div className="relative h-full w-full overflow-hidden">
                           {/* Primary Image */}
                           <motion.img
                             loading="lazy"
-                            src={getCloudinaryUrl(product.images[0], {
-                              width: 600,
-                            })}
-                            srcSet={getCloudinarySrcSet(product.images[0])}
+                            src={product?.images?.[0] ? getCloudinaryUrl(product.images[0], { width: 600 }) : ""}
+                            srcSet={product?.images?.[0] ? getCloudinarySrcSet(product.images[0]) : ""}
                             sizes="(max-width: 640px) 400px, 600px"
-                            alt={product.name}
+                            alt={product?.name || "Product"}
                             className="absolute inset-0 h-full w-full object-cover p-0"
                             animate={{
                               scale: isHovered ? 1.05 : 1,
@@ -167,14 +165,14 @@ export default function Wishlist() {
                           />
 
                           {/* Secondary Image - Crossfade */}
-                          {product.images[1] && (
+                          {product?.images?.[1] && (
                             <motion.img
                               src={getCloudinaryUrl(product.images[1], {
                                 width: 600,
                               })}
                               srcSet={getCloudinarySrcSet(product.images[1])}
                               sizes="(max-width: 640px) 400px, 600px"
-                              alt={`${product.name} alternate`}
+                              alt={`${product?.name || "Product"} alternate`}
                               loading="lazy"
                               className="absolute inset-0 h-full w-full object-cover"
                               initial={{ opacity: 0 }}
@@ -200,7 +198,7 @@ export default function Wishlist() {
                           className="pointer-events-auto"
                         >
                           <button
-                            onClick={(e) => handleQuickAdd(e, product)}
+                            onClick={(e) => product && handleQuickAdd(e, product)}
                             disabled={isAdding || isOutOfStock}
                             className="w-full bg-white text-(--color-dark) py-4 text-[9px] font-bold tracking-[0.3em] uppercase transition-all shadow-2xl border border-gray-100 hover:bg-(--color-dark) hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                           >
@@ -215,7 +213,7 @@ export default function Wishlist() {
 
                       {/* Remove Button - Minimalist X icon */}
                       <button
-                        onClick={() => handleToggleWishlist(product.id)}
+                        onClick={() => product?.id && handleToggleWishlist(product.id)}
                         className={`absolute top-4 right-4 z-30 w-10 h-10 rounded-none flex items-center justify-center transition-all ${
                           isHovered ? "opacity-100" : "opacity-0"
                         } bg-white hover:bg-black group/fav`}
@@ -228,9 +226,9 @@ export default function Wishlist() {
                       </button>
 
                       {/* Label (Sale/Status) */}
-                      {product.discountPercentage !== 0 && !isOutOfStock && (
+                      {(product?.discountPercentage || 0) !== 0 && !isOutOfStock && (
                         <div className="absolute top-4 left-0 bg-black text-white px-4 py-1.5 text-[8px] font-black tracking-[0.2em] uppercase z-10">
-                          {product.discountPercentage}% OFF
+                          {product?.discountPercentage}% OFF
                         </div>
                       )}
                       {isOutOfStock && (
@@ -243,21 +241,21 @@ export default function Wishlist() {
                     {/* Product Info */}
                     <div className="pt-4 space-y-2">
                       <Link
-                        to={`/products-details/${product.id}`}
+                        to={`/products-details/${product?.id || ""}`}
                         className="block"
                       >
                         <h3 className="text-xs font-semibold tracking-wider text-(--color-dark) uppercase hover:opacity-60 transition-opacity">
-                          {product.name}
+                          {product?.name || "Product"}
                         </h3>
                       </Link>
 
                       <div className="flex items-center gap-3">
                         <span className="text-base font-bold text-(--color-dark)">
-                          {product.price.toLocaleString()} EGP
+                          {product?.price?.toLocaleString() || 0} EGP
                         </span>
-                        {product.discountPercentage !== 0 && (
+                        {(product?.discountPercentage || 0) !== 0 && (
                           <span className="text-xs font-medium text-gray-400 line-through">
-                            {product.promotionalPrice.toLocaleString()} EGP
+                            {product?.promotionalPrice?.toLocaleString() || 0} EGP
                           </span>
                         )}
                       </div>
@@ -265,7 +263,7 @@ export default function Wishlist() {
                       {/* Management Controls */}
                       {user && user.role !== "user" && (
                         <Link
-                          to={`/edit-product/${product.id}`}
+                          to={`/edit-product/${product?.id || ""}`}
                           className="block mt-4"
                         >
                           <motion.button className="w-full bg-black py-4 text-[9px] font-black uppercase tracking-[0.2em] text-white transition-all hover:opacity-80 rounded-none">

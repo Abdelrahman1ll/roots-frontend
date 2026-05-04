@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -30,6 +29,7 @@ export default defineConfig(({ mode }) => {
   };
 
   return {
+    base: "/roots-frontend/",
     // List of plugins to enhance Vite functionality
     // قائمة الإضافات (Plugins) لتحسين وظائف Vite
     plugins: [
@@ -94,7 +94,7 @@ export default defineConfig(({ mode }) => {
     // إعدادات تحسين نسخة الإنتاج النهائية
     build: {
       target: "esnext", // Output modern JS - إنتاج كود جافا سكريبت حديث
-      minify: "esbuild", // Minify JS/CSS - ضغط الكود
+      minify: "esbuild" as const, // Minify JS/CSS - ضغط الكود
       cssCodeSplit: true, // Split CSS per page - تقسيم ملفات التصميم
       chunkSizeWarningLimit: 600, // Reduced limit for better awareness
       reportCompressedSize: false, // Speed up build

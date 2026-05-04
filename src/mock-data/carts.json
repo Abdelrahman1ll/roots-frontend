@@ -1,0 +1,27 @@
+{
+  "carts": {
+    "items": [
+      {
+        "id": 1,
+        "product": {
+          "id": 1,
+          "name": "Classic Cotton T-Shirt",
+          "price": 500,
+          "images": [
+            "https://res.cloudinary.com/dawkbwkfd/image/upload/v1771811405/products/qw0aijqh3wresp8ygfky.jpg"
+          ],
+          "stock": 100,
+          "total_stock": 100
+        },
+        "sizes": {
+          "id": 2,
+          "size": "M",
+          "length": 72,
+          "width": 52
+        },
+        "quantity": 1,
+        "price": 500
+      }
+    ]
+  }
+}

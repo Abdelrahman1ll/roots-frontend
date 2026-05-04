@@ -3,12 +3,23 @@ import { Link } from "react-router-dom";
 import { getCloudinaryUrl, getCloudinarySrcSet } from "../../utils/cloudinary";
 import { useRef } from "react";
 
-const HERO_IMG_1 =
-  "v1768316743/premium_photo-1673826949034-18367fc03955_xcpma8";
-const HERO_IMG_2 =
-  "v1768316700/premium_photo-1673826949034-18367fc03955_xcpma8";
-const HERO_IMG_3 =
-  "v1768316743/premium_photo-1673826949034-18367fc03955_xcpma8";
+/*
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                                      ║
+║  [ENGLISH]                                                                                           ║
+║  Update these IDs after uploading the 3 new generated images to your Cloudinary account.             ║
+║  The new images match the 'Roots Archive' premium aesthetic.                                         ║
+║                                                                                                      ║
+║  [ARABIC]                                                                                            ║
+║  قم بتحديث هذه المعرفات (IDs) بعد رفع الصور الثلاث الجديدة التي تم إنشاؤها إلى حساب Cloudinary الخاص بك. ║
+║  الصور الجديدة تتماشى مع المظهر الفاخر لـ 'Roots Archive'.                                            ║
+║                                                                                                      ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════╝
+*/
+
+const HERO_IMG_1 = "v1777847820/hero1_bwwsrm.jpg";
+const HERO_IMG_2 = "v1777847824/hero2_klnwmk.jpg";
+const HERO_IMG_3 = "v1777847830/hero3_temwcg.jpg";
 
 export default function Main() {
   const containerRef = useRef(null);

@@ -1,0 +1,15 @@
+[
+  { "id": 1, "name": "Red", "color": "#FF0000" },
+  { "id": 2, "name": "Blue", "color": "#0000FF" },
+  { "id": 3, "name": "Green", "color": "#00FF00" },
+  { "id": 4, "name": "Yellow", "color": "#FFFF00" },
+  { "id": 5, "name": "Purple", "color": "#800080" },
+  { "id": 6, "name": "Orange", "color": "#FFA500" },
+  { "id": 7, "name": "Black", "color": "#000000" },
+  { "id": 8, "name": "White", "color": "#FFFFFF" },
+  { "id": 9, "name": "Pink", "color": "#FFC0CB" },
+  { "id": 10, "name": "Grey", "color": "#808080" },
+  { "id": 11, "name": "Brown", "color": "#A52A2A" },
+  { "id": 12, "name": "Cyan", "color": "#00FFFF" },
+  { "id": 13, "name": "Navy", "color": "#000080" }
+]

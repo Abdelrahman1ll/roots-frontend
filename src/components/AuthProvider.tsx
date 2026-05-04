@@ -1,12 +1,12 @@
 import { useState, useEffect, type ReactNode } from "react";
 import Cookies from "js-cookie";
-import CryptoJS from "crypto-js";
 import type { UserType } from "../types/UserType";
 import {
   AuthContext,
   type AuthData,
   type SetUserPayload,
 } from "../context/AuthContext";
+import { getMockUser } from "../mock-data/staticData";
 
 /**
  * AuthProvider component that wraps the application and provides the auth state.
@@ -16,14 +16,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, _setUser] = useState<UserType | null>(null);
   const [initializing, setInitializing] = useState(true);
 
-  const secretKey =
-    import.meta.env.VITE_SECRET_KEY || "fallback_secret_key_dev_only";
-
-  if (!import.meta.env.VITE_SECRET_KEY && import.meta.env.DEV) {
-    console.warn(
-      "VITE_SECRET_KEY is missing in environment variables! Using dev fallback."
-    );
-  }
+  // SECURITY NOTE: We removed the CryptoJS "encryption" because VITE_SECRET_KEY is
+  // bundled into the production static files and is publicly accessible.
+  // Using it for encryption on the frontend provides a false sense of security.
+  // RECOMMENDATION: Move token storage to httpOnly cookies set by the backend.
 
   /**
    * Sets the user state and persists it to an encrypted cookie.
@@ -60,14 +56,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } else {
       // If updating user only, merge with existing cookie to preserve tokens
       // في حالة تحديث بيانات المستخدم فقط، نقوم بدمجها مع البيانات الحالية للحفاظ على التوكنز
-      const encryptedUser = Cookies.get("user");
-      if (encryptedUser) {
+      const rawUser = Cookies.get("user");
+      if (rawUser) {
         try {
-          const decrypted = CryptoJS.AES.decrypt(
-            encryptedUser,
-            secretKey
-          ).toString(CryptoJS.enc.Utf8);
-          const existing = JSON.parse(decrypted);
+          const existing = JSON.parse(rawUser);
           cookieData = { ...existing, user: userData };
         } catch {
           cookieData = { user: userData };
@@ -77,16 +69,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    // Encrypt coordinates data for security
-    // تشفير البيانات المجمعة لضمان الأمان
-    const encrypted = CryptoJS.AES.encrypt(
-      JSON.stringify(cookieData),
-      secretKey
-    ).toString();
-
-    // Save to cookies with a 90-day expiry
-    // حفظ في الكوكيز بمدة انتهاء 90 يوماً
-    Cookies.set("user", encrypted, {
+    // Securely save to cookies
+    // Note: HttpOnly cannot be set from JS, but we use SameSite=Strict and Secure for some protection.
+    Cookies.set("user", JSON.stringify(cookieData), {
       expires: 90,
       secure: import.meta.env.VITE_NODE_ENV === "production",
       sameSite: "strict",
@@ -96,45 +81,60 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   /**
    * Clears the user state and removes authentication cookies.
-   * وظيفة تسجيل الخروج، تقوم بمسح حالة المستخدم وحذف الكوكيز.
+   * وظيفة تسجيل الخروج، تقوم بمسح حالة المستخدم وحذف الكوكيز وتفريغ التخزين المحلي.
    */
   const logout = () => {
     _setUser(null);
     Cookies.remove("user");
+    localStorage.clear();
   };
 
   /**
    * Effect hook to initialize the auth state from cookies on application load.
-   * تأثير برمجي عند تحميل التطبيق لاستعادة حالة المصادقة من الكوكيز.
    */
   useEffect(() => {
-    const encryptedUser = Cookies.get("user");
-    if (encryptedUser) {
+    const rawUser = Cookies.get("user");
+    let parsedUser = null;
+
+    if (rawUser) {
       try {
-        // Attempt to decrypt and parse the user data
-        // محاولة فك التشفير وقراءة بيانات المستخدم
-        const bytes = CryptoJS.AES.decrypt(encryptedUser, secretKey);
-        const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-        const parsed = JSON.parse(decrypted);
+        const parsed = JSON.parse(rawUser);
         if (parsed?.user) {
-          _setUser(parsed.user);
+          parsedUser = parsed.user;
         } else if (parsed?.role) {
-          // Backward compatibility if cookie was just a user object
-          // دعم النسخ القديمة إذا كانت الكوكي تحتوي على بيانات المستخدم مباشرة
-          _setUser(parsed);
+          parsedUser = parsed;
         } else {
-          _setUser(null);
+          Cookies.remove("user");
         }
       } catch (error) {
-        console.error("Failed to decrypt auth cookie:", error);
-        _setUser(null);
+        console.error("Failed to parse auth cookie, clearing it:", error);
+        Cookies.remove("user");
       }
-    } else {
-      _setUser(null);
     }
 
-    setInitializing(false); // Auth check is complete | اكتملت عملية التحقق
-  }, [secretKey]);
+    if (parsedUser) {
+      _setUser(parsedUser);
+    } else {
+      // --- Static Mock User (for GitHub Pages / No Backend) ---
+      if (
+        import.meta.env.PROD ||
+        !import.meta.env.VITE_APP_API_URL ||
+        import.meta.env.VITE_APP_API_URL.includes("localhost:3000")
+      ) {
+        // We use setUser wrapper here instead of _setUser to ensure the cookie 
+        // is populated and the user is persistently logged in across the app
+        setUser({
+          user: getMockUser(),
+          accessToken: "mock_access_token",
+          refreshToken: "mock_refresh_token",
+        });
+      } else {
+        _setUser(null);
+      }
+    }
+
+    setInitializing(false);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, setUser, logout, initializing }}>

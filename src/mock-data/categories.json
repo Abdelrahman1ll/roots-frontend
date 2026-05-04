@@ -1,0 +1,15 @@
+[
+  { "id": 1, "name": "Clothing" },
+  { "id": 2, "name": "Shoes" },
+  { "id": 3, "name": "Accessories" },
+  { "id": 4, "name": "Bags" },
+  { "id": 5, "name": "Jewelry" },
+  { "id": 6, "name": "Watches" },
+  { "id": 7, "name": "Sunglasses" },
+  { "id": 8, "name": "Hats" },
+  { "id": 9, "name": "Dresses" },
+  { "id": 10, "name": "Tops" },
+  { "id": 11, "name": "Bottoms" },
+  { "id": 12, "name": "Activewear" },
+  { "id": 13, "name": "Outerwear" }
+]

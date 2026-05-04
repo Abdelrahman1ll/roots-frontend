@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "code": "SAVE10",
+    "discount": 10,
+    "type": "percentage"
+  },
+  {
+    "id": 2,
+    "code": "WELCOME20",
+    "discount": 20,
+    "type": "percentage"
+  },
+  {
+    "id": 3,
+    "code": "FREESHIP",
+    "discount": 50,
+    "type": "fixed"
+  },
+  {
+    "id": 4,
+    "code": "SUMMER15",
+    "discount": 15,
+    "type": "percentage"
+  },
+  {
+    "id": 5,
+    "code": "VIP50",
+    "discount": 50,
+    "type": "percentage"
+  }
+]

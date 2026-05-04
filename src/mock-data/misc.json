@@ -1,0 +1,35 @@
+{
+  "delivery": {
+    "deliveries": [
+      {
+        "id": 1,
+        "deliveryPriceClose": 50,
+        "deliveryPriceFar": 100,
+        "freeDelivery": false
+      }
+    ]
+  },
+  "freeDelivery": {
+    "success": true
+  },
+  "payment": {
+    "clientSecret": "pi_3O4xX_mock_secret",
+    "iframe_id": "mock_iframe_123",
+    "token": "mock_token_456"
+  },
+  "emailOrderDispatcher": [
+    {
+      "id": 1,
+      "name": "Abdelrahman Hasan",
+      "email": "abdo@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Yassin Ahmed",
+      "email": "yassin@example.com"
+    }
+  ],
+  "successResponse": {
+    "success": true
+  }
+}

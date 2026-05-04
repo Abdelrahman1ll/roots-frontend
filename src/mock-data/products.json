@@ -1,0 +1,214 @@
+[
+  {
+    "id": 1,
+    "name": "Classic Cotton T-Shirt",
+    "description": "High-quality 100% cotton t-shirt, perfect for everyday wear.",
+    "price": 500,
+    "promotionalPrice": 450,
+    "discountPercentage": 10,
+    "images": [
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777851592/hero5_ss7zdm.jpg",
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777847830/hero3_temwcg.jpg"
+    ],
+    "category": "Clothing",
+    "stock": 100,
+    "wholesalePrice": 10,
+    "packagingCost": 2,
+    "marketingCosts": 3,
+    "sold": 45,
+    "sizes": [
+      {
+        "id": 1,
+        "size": "S",
+        "length": 70,
+        "width": 50,
+        "stock": 30
+      },
+      {
+        "id": 2,
+        "size": "M",
+        "length": 72,
+        "width": 52,
+        "stock": 40
+      },
+      {
+        "id": 3,
+        "size": "L",
+        "length": 74,
+        "width": 54,
+        "stock": 30
+      }
+    ],
+    "colors": "White, Black, Navy",
+    "totalReviews": 12,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "total_stock": 100,
+    "details": "This classic cotton t-shirt is made from 100% premium cotton, offering a soft and breathable feel for all-day comfort. Designed with a timeless fit, it features a ribbed crew neck and double-stitched hems for durability. Ideal for layering or wearing on its own.",
+    "features": [
+      "100% Premium Cotton",
+      "Breathable and lightweight",
+      "Regular fit for all-day comfort",
+      "Durable double-stitched hems",
+      "Machine washable"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Classic Cotton T-Shirt",
+    "description": "High-quality 100% cotton t-shirt, perfect for everyday wear.",
+    "price": 1500,
+    "promotionalPrice": 1200,
+    "discountPercentage": 20,
+    "images": [
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777851598/hero6_cfntly.jpg",
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777851604/hero4_mjddvm.jpg"
+    ],
+    "category": "Clothing",
+    "stock": 100,
+    "wholesalePrice": 10,
+    "packagingCost": 2,
+    "marketingCosts": 3,
+    "sold": 45,
+    "sizes": [
+      {
+        "id": 1,
+        "size": "S",
+        "length": 70,
+        "width": 50,
+        "stock": 30
+      },
+      {
+        "id": 2,
+        "size": "M",
+        "length": 72,
+        "width": 52,
+        "stock": 40
+      },
+      {
+        "id": 3,
+        "size": "L",
+        "length": 74,
+        "width": 54,
+        "stock": 30
+      }
+    ],
+    "colors": "White, Black, Navy",
+    "totalReviews": 12,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "total_stock": 100,
+    "details": "Experience ultimate comfort with our Classic Cotton T-Shirt. Crafted from high-grade cotton fibers, this shirt is designed to withstand multiple washes while maintaining its shape and softness. The versatile design makes it a staple for any wardrobe.",
+    "features": [
+      "100% High-grade Cotton",
+      "Soft-touch finish",
+      "Ribbed crew neck",
+      "Available in multiple colors",
+      "Perfect for casual wear"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Classic Cotton T-Shirt",
+    "description": "High-quality 100% cotton t-shirt, perfect for everyday wear.",
+    "price": 850,
+    "promotionalPrice": 750,
+    "discountPercentage": 11,
+    "images": [
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777847824/hero2_klnwmk.jpg",
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777847820/hero1_bwwsrm.jpg"
+    ],
+    "category": "Clothing",
+    "stock": 100,
+    "wholesalePrice": 10,
+    "packagingCost": 2,
+    "marketingCosts": 3,
+    "sold": 45,
+    "sizes": [
+      {
+        "id": 1,
+        "size": "S",
+        "length": 70,
+        "width": 50,
+        "stock": 30
+      },
+      {
+        "id": 2,
+        "size": "M",
+        "length": 72,
+        "width": 52,
+        "stock": 40
+      },
+      {
+        "id": 3,
+        "size": "L",
+        "length": 74,
+        "width": 54,
+        "stock": 30
+      }
+    ],
+    "colors": "White, Black, Navy",
+    "totalReviews": 12,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "total_stock": 100,
+    "details": "Experience ultimate comfort with our Classic Cotton T-Shirt. Crafted from high-grade cotton fibers, this shirt is designed to withstand multiple washes while maintaining its shape and softness. The versatile design makes it a staple for any wardrobe.",
+    "features": [
+      "100% High-grade Cotton",
+      "Soft-touch finish",
+      "Ribbed crew neck",
+      "Available in multiple colors",
+      "Perfect for casual wear"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Classic Cotton T-Shirt",
+    "description": "High-quality 100% cotton t-shirt, perfect for everyday wear.",
+    "price": 2500,
+    "promotionalPrice": 1999,
+    "discountPercentage": 20,
+    "images": [
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777851604/hero4_mjddvm.jpg",
+      "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777847830/hero3_temwcg.jpg"
+    ],
+    "category": "Clothing",
+    "stock": 100,
+    "wholesalePrice": 10,
+    "packagingCost": 2,
+    "marketingCosts": 3,
+    "sold": 45,
+    "sizes": [
+      {
+        "id": 1,
+        "size": "S",
+        "length": 70,
+        "width": 50,
+        "stock": 30
+      },
+      {
+        "id": 2,
+        "size": "M",
+        "length": 72,
+        "width": 52,
+        "stock": 40
+      },
+      {
+        "id": 3,
+        "size": "L",
+        "length": 74,
+        "width": 54,
+        "stock": 30
+      }
+    ],
+    "colors": "White, Black, Navy",
+    "totalReviews": 12,
+    "createdAt": "2024-01-15T10:00:00Z",
+    "total_stock": 100,
+    "details": "Experience ultimate comfort with our Classic Cotton T-Shirt. Crafted from high-grade cotton fibers, this shirt is designed to withstand multiple washes while maintaining its shape and softness. The versatile design makes it a staple for any wardrobe.",
+    "features": [
+      "100% High-grade Cotton",
+      "Soft-touch finish",
+      "Ribbed crew neck",
+      "Available in multiple colors",
+      "Perfect for casual wear"
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "wishlist": [
+    {
+      "id": 4,
+      "product": {
+        "id": 2,
+        "name": "Classic Cotton T-Shirt",
+        "price": 1500,
+        "images": [
+          "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777851604/hero4_mjddvm.jpg",
+          "https://res.cloudinary.com/dnjilyjr4/image/upload/v1777847830/hero3_temwcg.jpg"
+        ],
+        "category": "Clothing",
+        "stock": 100,
+        "promotionalPrice": 1200,
+        "discountPercentage": 20
+      }
+    }
+  ]
+}

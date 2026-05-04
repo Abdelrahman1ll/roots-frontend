@@ -18,7 +18,7 @@ export default function useProductDetail() {
   const { data: products, isLoading, isFetching } = useGetProductIdQuery(id);
   const { openSignup } = useContext(SignupContext);
 
-  const product: ProductType = products?.product;
+  const product: ProductType = products?.product || products;
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
 
   const { isFav, handleToggleWishlist: toggleWishlist } = useWishlistToggle();

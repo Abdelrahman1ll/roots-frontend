@@ -123,12 +123,12 @@ export default function UserMenu({
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="absolute right-0 w-64 bg-white text-(--color-pakistan) shadow-xl rounded-xl overflow-hidden border border-(--color-border) z-50 p-1.5
+            className="absolute right-0 w-64 bg-white text-(--color-pakistan) shadow-xl overflow-hidden border border-(--color-border) z-50 p-1.5
                   max-[1180px]:fixed max-[1180px]:bottom-[4.8rem] max-[1180px]:right-4 max-[1180px]:w-[calc(100%-2rem)] max-[1180px]:max-w-xs max-[1180px]:top-auto max-[1180px]:mt-0
                   min-[1180px]:mt-4 min-[1180px]:top-full
               "
           >
-            <div className="py-4 px-5 mb-1 bg-(--color-gray-soft) rounded-lg">
+            <div className="py-4 px-5 mb-1 bg-(--color-gray-soft)">
               <p className="text-[9px] font-bold uppercase text-(--color-dark)/40 tracking-[0.2em] leading-none mb-2">
                 Logged in as
               </p>
@@ -142,11 +142,11 @@ export default function UserMenu({
                 <motion.div key={item.to} variants={itemVariants}>
                   <Link
                     to={item.to}
-                    className="group flex items-center justify-between px-3 py-2 rounded-xl transition-all duration-300 hover:bg-(--color-tiger) hover:text-white"
+                    className="group flex items-center justify-between px-3 py-2 transition-all duration-300 hover:bg-(--color-tiger) hover:text-white"
                     onClick={() => setOpenMenu(false)}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="p-1.5 rounded-lg bg-(--color-tiger)/10 group-hover:bg-white/20 transition-colors">
+                      <div className="p-1.5 bg-(--color-tiger)/10 group-hover:bg-white/20 transition-colors">
                         <item.icon
                           size={16}
                           className="text-(--color-tiger) group-hover:text-white"
@@ -169,11 +169,11 @@ export default function UserMenu({
                     <motion.div key={item.to} variants={itemVariants}>
                       <Link
                         to={item.to}
-                        className="group flex items-center justify-between px-3 py-2 rounded-xl transition-all duration-300 hover:bg-(--color-tiger) hover:text-white"
+                        className="group flex items-center justify-between px-3 py-2 transition-all duration-300 hover:bg-(--color-tiger) hover:text-white"
                         onClick={() => setOpenMenu(false)}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="p-1.5 rounded-lg bg-(--color-tiger)/10 group-hover:bg-white/20 transition-colors">
+                          <div className="p-1.5 bg-(--color-tiger)/10 group-hover:bg-white/20 transition-colors">
                             <item.icon
                               size={16}
                               className="text-(--color-tiger) group-hover:text-white"
@@ -203,7 +203,7 @@ export default function UserMenu({
                   handleLogout();
                   setOpenMenu(false);
                 }}
-                className="w-full group flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-300 hover:bg-red-50 text-red-600 font-bold"
+                className="w-full group flex items-center gap-3 px-4 py-3 text-left transition-all duration-300 hover:bg-red-50 text-red-600 font-bold"
               >
                 <LogOut size={16} />
                 <span className="text-xs uppercase tracking-widest">
