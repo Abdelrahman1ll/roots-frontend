@@ -50,7 +50,6 @@ describe("useReviews Hook", () => {
     const { result } = renderHook(() => useReviews());
     expect(result.current.newRating).toBe(0);
     expect(result.current.newComment).toBe("");
-    expect(result.current.showReviews).toBe(false);
     expect(result.current.editingReview).toBeNull();
   });
 

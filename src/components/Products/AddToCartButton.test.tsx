@@ -19,12 +19,12 @@ vi.mock("framer-motion", () => ({
 
 describe("AddToCartButton Component", () => {
   it("renders correctly", () => {
-    render(<AddToCartButton addToCart={() => {}} />);
+    render(<AddToCartButton addToCart={async () => true} />);
     expect(screen.getByText(/Add to Cart/i)).toBeInTheDocument();
   });
 
   it("calls addToCart function on click", () => {
-    const addToCartMock = vi.fn();
+    const addToCartMock = vi.fn().mockResolvedValue(true);
     render(<AddToCartButton addToCart={addToCartMock} />);
 
     const button = screen.getByRole("button");
@@ -35,7 +35,7 @@ describe("AddToCartButton Component", () => {
 
   it("shows clicked state correctly", () => {
     vi.useFakeTimers();
-    const addToCartMock = vi.fn();
+    const addToCartMock = vi.fn().mockResolvedValue(true);
     render(<AddToCartButton addToCart={addToCartMock} />);
 
     const button = screen.getByRole("button");
